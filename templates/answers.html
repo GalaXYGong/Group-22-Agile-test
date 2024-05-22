@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/login.css">
+    <title>answers</title>
+</head>
+<body>
+    <div class="banner">
+        <div class="unolingo"><h2>UNOLINGO</h2></div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="logo">
+            <img src="static/trilingo_blue_owl.png" alt="Logo">
+        </div>
+        <form class="reset-form" action="/auth/forgot/answer" method="POST">
+                <p>user: {{ username }}</p>
+                <input type="hidden" name="username" value="{{ username }}">
+                <p>{{ questions[0] }}</p>
+                <input type="text" name="answer1" placeholder="answer for secure question1">
+                <p>{{ questions[1] }}</p>
+                <input type="text" name="answer2" placeholder="answer for secure question2">
+                <p>new password</p>
+                <input type="password" name="password" placeholder="password">
+                <p>confirm new password</p>
+                <input type="password" name="password" placeholder="password">
+                <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

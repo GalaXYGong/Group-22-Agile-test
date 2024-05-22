@@ -2,6 +2,7 @@ import sqlite3, json,requests
 from pathlib import Path
 from model import Word
 from usermod import create_account_table
+from database import secure_question_list
 database = './database/database.db'
 connection = sqlite3.connect(database,check_same_thread=False) # create the file if it does not exist 
 cursor = connection.cursor() # cursor is used to interact with the database 
@@ -47,9 +48,40 @@ def get_existing_words(path):
         word_list = [word["word"] for word in data]
         return word_list
 
+def create_secure_question_table():
+    drop("SECURE_QUESTION")
+    statement_secure_question = """CREATE TABLE IF NOT EXISTS SECURE_QUESTION
+                    (id  INTEGER PRIMARY KEY AUTOINCREMENT,
+                    question TEXT NOT NULL);"""
+    execute(statement_secure_question)
+    for question in secure_question_list.secure_questions:
+        statement = f"""INSERT INTO SECURE_QUESTION
+                        (question) 
+                        VALUES ('{question}')"""
+        execute(statement)
+
+############################################################################################################
+# get all the secure questions from the database                                                           #
+# the function in the manage.py file is return_all_secure_question() -> list:                              #
+# need to "from manage import return_all_secure_question" before calling the function                      #
+# take no arguments                                                                                        #
+# e.g. return_all_secure_question()                                                                        #
+# the called function above equals to the following SQL statement                                          #
+# SELECT * FROM SECURE_QUESTION                                                                            #
+# the function returns a list of all the secure questions                                                  #
+# e.g. [(1, 'What is your favorite color?'), (2, 'What is your favorite food?'), (3, 'What is your favorite movie?'), (4, 'What is your favorite book?'), (5, 'What is your favorite song?'), (6, 'What name is your favorite pet?'), (7, 'What is your favorite game?'), (8, 'What is your favorite TV show?'), (9, 'What is your favorite car?'), (10, 'Where was you born?'), (11, 'Which city did you parents met?')]#
+############################################################################################################
+def return_all_secure_question()->list:
+    rows = cursor.execute(f'SELECT * FROM SECURE_QUESTION') 
+    result = rows.fetchall()
+    print("Return_all_secure_question()",result)
+    return result
+
 if __name__ == "__main__":
+    create_secure_question_table()
     create_account_table()
     # drop everything in the database before adding new tables
+    drop("QUESTION_ACCOUNT")
     question_definition = "QUESTION_DEFINITION"
     question_blank = "QUESTION_BLANK"
     question_table_list = [question_definition, question_blank]
@@ -62,13 +94,14 @@ if __name__ == "__main__":
                     correct TEXT NOT NULL,
                     incorrect TEXT NOT NULL,
                     weight INTEGER DEFAULT 1,
+                    phonetics_url TEXT,
                     example TEXT);"""
         execute(statement_question_table)
 
     # an  list to store the words themselves
-    list_of_words= get_existing_words("data.json")
+    list_of_words= get_existing_words("database/data.json")
     # get the words we have in the json file, this words are not processed, with only the word, and 4 meanings, 1 correct and 3 incorrect
-    with open("data.json","r",encoding="utf-8") as file:
+    with open("database/data.json","r",encoding="utf-8") as file:
         data = json.load(file)
         for word in data:
             word_tuple = get_meaning_phone(word["word"],data)
@@ -78,10 +111,11 @@ if __name__ == "__main__":
             word_for_question_dictionary = word_for_question.__dict__
             # append the dictionary into table question_definition of database
             statement= f"""INSERT INTO {question_definition}
-                        (word, correct, incorrect, example) 
+                        (word, correct, incorrect,phonetics_url, example) 
                         VALUES ('{word_for_question_dictionary['word']}', 
                             '{word_for_question_dictionary['correct']}', 
-                            '{json.dumps(word_for_question_dictionary['incorrect_list'])}', 
+                            '{json.dumps(word_for_question_dictionary['incorrect_list'])}',
+                            '{word_for_question_dictionary['phonetics']}', 
                             "{word_for_question_dictionary['word_example']}")"""
             execute(statement)
 
@@ -92,10 +126,11 @@ if __name__ == "__main__":
             Word.choose_word(word_blank,list_of_words)
             word_blank_dictionary = word_blank.__dict__
             statement= f"""INSERT INTO {question_blank}
-                        (word, correct, incorrect, example) 
+                        (word, correct, incorrect, phonetics_url,example) 
                         VALUES ('{word_blank_dictionary['word']}', 
                             '{word_blank_dictionary['correct']}', 
-                            '{json.dumps(word_blank_dictionary['incorrect_list'])}', 
+                            '{json.dumps(word_blank_dictionary['incorrect_list'])}',
+                            '{word_for_question_dictionary['phonetics']}',  
                             "{word_blank_dictionary['word_example']}")"""
             execute(statement)
     # create an associative table for the question_account

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test_db_data</title>
+    <style>
+        #submit_score {
+            display: none;
+        }
+        #videoPlayer {
+            display: none;
+        }
+     
+    </style>
+</head>
+<body>
+
+    
+    <h1>Welcome {{ username }}</h1>
+    
+<!-- A button to toggle between light and dark mode. NOTE: For some reason it takes a few seconds and clicks before it works. No Idea why. -->
+<button type="button" id="light_setting">Light or Dark Mode</button>
+
+<!-- Mute Button -->
+<button type="button" id="mute_setting">Mute</button>
+    
+    <h2> Play Basic Unolingo Game</h2>
+<div id="guess_box" class="guess_box">
+    <h3 id="player_score_html"> Player Score: 0</h3>
+    <div id="player-lives-container"></div>
+    <form id="guess_form" class="guess_form">
+        <label for="question">Question:</label>
+        <p id="question"></p>
+        <fieldset id="options"></fieldset>
+        <input id="guess_submit guess_submit_button" type="submit">
+        <br>
+    </form>
+    <hr>
+    <button id="next_question"> Next Question</button>
+    <hr>
+    <div id="log"></div>
+</div>
+
+<hr>
+<button id="start_game_button">Start Game </button>
+<button id="reset_game_button"> Reset Entire Session </button>
+<button id="submit_score">Submit Score</button>
+<hr>
+
+<button id="playButton">Play Video</button>
+    <video id="videoPlayer" controls>
+        <source src="{{ url_for('static', filename='assets/video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <audio id="oof-sound" src="static/assets/oof.mp3"></audio>
+    <audio id="murloc-sound" src="static/assets/murloc.mp3"></audio>
+
+    <script>
+        //DOM Variables
+        let guess_box = document.getElementById("guess_box");
+        let guess_form = document.getElementById("guess_form");
+        let question = document.getElementById("question");
+        let options = document.getElementById("options");
+        //let guess_submit = document.getElementById("guess_submit");
+        //let reset_button = document.getElementById("reset_button");
+        let start_game_button = document.getElementById("start_game_button");
+        let reset_game_button = document.getElementById("reset_game_button");
+        let log = document.getElementById("log");
+        let player_score = document.getElementById("player_score_html");
+        let guess_submit_button = document.getElementById("guess_submit guess_submit_button");
+        let next_question_button = document.getElementById("next_question");
+        let playerLivesContainer = document.getElementById("player-lives-container");
+        let submit_score = document.getElementById("submit_score");
+
+        let light_setting = document.getElementById("light_setting");
+        let body = document.body;
+
+        let mute_setting = document.getElementById("mute_setting");
+
+
+        //Global Variables
+        let lives = 5;
+        let mistakes = 0;
+        let mute = false;
+
+       // Get the data from the db files that we created in flask that we are passing up to the html
+       //It complains about it being an error but it works
+       
+       let username =  {{ username | tojson | safe }};
+
+       let question_blank = {{ question_blank | tojson | safe }};
+       let question_definition = {{ question_defination | tojson | safe }};
+
+       question_blank = question_blank.replace(/\\"\[/g, '[').replace(/\]\\"/g, ']');
+
+// Parse the string into a JavaScript array
+question_blank = JSON.parse(question_blank);
+
+//console.log(parsedQuestionBlank);
+
+        //console.log(question_blank[0]);
+        //console.log(question_definition);
+
+        //console.log(question_blank[0]);
+
+        //Variable that's 1 if the current question is the blank and 0 if the current question is the definition
+        let question_type;
+
+        let current_question_description;
+        let current_question_answer;
+
+        let player_score_counter = 0;
+
+        let user_name = "ahmed";
+
+        let audio;
+
+        //Functions
+        function random_number_generator(number) {
+        // Generates a random number between 0 and the given number (exclusive).
+        //
+        // Parameters:
+        //   number (number): The upper bound for the random number generation.
+        //
+        // Returns:
+        //   number: The randomly generated number.
+        return Math.floor(Math.random() * number);
+    };
+
+     //Function to generate a multiple choice question from question_blank
+     function generate_multiple_choice_question() {
+        let question_index = random_number_generator(question_blank.length);
+        let current_question = question_blank[question_index];
+        current_question_description = current_question[5];
+        current_question_answer = current_question[2];
+        //Need to get the choices
+        let current_question_choices = current_question[3];
+
+        //Note: current_question_choices is a really long string. Need to adjust it first
+
+        //I need to remove the quotes
+        current_question_choices = current_question_choices.replace(/"/g, "");
+
+        //Now remove the square brackets
+        current_question_choices = current_question_choices.replace(/\[|\]/g, "");
+
+        
+        //I need to split it into an array
+        current_question_choices = current_question_choices.split(",");
+        
+
+        //Need to append the answer to the choices
+        current_question_choices.push(current_question_answer);
+        
+        
+        
+
+        //Display Question on form:
+        //question.innerHTML = `MCQ Question: ${current_question[0]}`;
+        question.innerHTML = `MCQ Question: ${current_question_description}`;
+
+        //Display Options on form:
+        options.innerHTML = "";
+        for (let option of current_question_choices) {
+            let option_element = document.createElement("input");
+            option_element.type = "radio";
+            option_element.name = "option";
+            option_element.value = option;
+            options.appendChild(option_element);
+            let option_label = document.createElement("label");
+            option_label.innerHTML = option;
+            options.appendChild(option_label);
+        }
+        //Set that current question is multiple choice
+        question_type = 0;
+        return current_question;
+
+    }
+
+    function start_game_button_function() {
+        guess_box.style.display = "block";
+        start_game_button.disabled = true;
+        reset_game_button.disabled = false;
+        displayPlayerLives(lives, mistakes);
+
+        //Get question
+        let current_question = generate_multiple_choice_question();
+        //let current_question = generate_written_question();
+        //let current_question = randomly_choose_written_or_multiple_choice();
+
+        console.log(current_question_answer)
+
+    }
+
+    function guess_submit(event) {
+        event.preventDefault();
+        guess_submit_button.disabled = true;
+
+        // For multiple-choice question
+        if (question_type === 0) {
+            let selected_option;
+            let options = document.getElementsByName("option");
+            for (let option of options) {
+                if (option.checked) {
+                    user_answer = option.value;
+                    break;
+                }
+            }
+            console.log("Selected option:", user_answer);
+        } else if (question_type === 1) { // For written question
+            user_answer = document.getElementsByName("answer")[0].value;
+            console.log("Written answer:", user_answer);
+        }
+
+        // Compare the answer with the correct answer here
+        check_answer(user_answer);
+    }
+
+    //Function to check if the answer is correct, display result and style page accordingly
+    function check_answer(user_answer) {
+        //Check if they match:
+        if (user_answer === current_question_answer) {
+            //Display correct
+            log.innerHTML = "Correct";
+            log.style.color = "green";
+            //Style Guess box border 10px green
+            guess_box.style.borderColor = "green";
+            guess_box.style.borderStyle = "solid";
+            guess_box.style.borderWidth = "10px";
+
+
+            //Increase player score
+            player_score_counter++;
+            player_score.innerHTML = `Score: ${player_score_counter}`
+            audio = document.getElementById('murloc-sound');
+            if (mute === false) {
+                audio.play();
+            }
+        } else {
+            //Display wrong
+            log.innerHTML = `Wrong. The correct answer was ${current_question_answer}`;
+            log.style.color = "red";
+            //Style Guess box border
+            guess_box.style.borderColor = "red";
+            guess_box.style.borderStyle = "solid";
+            guess_box.style.borderWidth = "10px";
+            mistakes++;
+            lives--;
+            displayPlayerLives(lives, mistakes);
+            audio = document.getElementById('oof-sound');
+            //check if mute is false
+            if (mute === false) {
+                audio.play();
+            }
+
+
+            //Check if they have run out of lives
+            if (lives === 0) {
+                //Display Game over
+                log.innerHTML += ". Out of Lives. Game over";
+                //disable next question button
+        next_question_button.disabled = true;
+        submit_score.style.display = "block";
+        
+        }
+        
+
+        }
+        
+
+    }
+
+    function next_question_button_function() {
+
+        //Reset guess form
+        guess_form.reset();
+        guess_submit_button.disabled = false;
+
+        //Reset options
+        options.innerHTML = "";
+
+        //Reset log
+        log.innerHTML = "";
+        //Reset border
+        guess_box.style.borderColor = "black";
+        guess_box.style.borderStyle = "solid";
+        guess_box.style.borderWidth = "1px";
+
+        //generate next question
+
+        //let current_question = randomly_choose_written_or_multiple_choice();
+        let current_question = generate_multiple_choice_question();
+
+    }
+
+    // Function to generate heart emojis or skull emojis based on the number of lives remaining and mistakes made
+function displayPlayerLives(lives, mistakes) {
+    // Clear the container first
+    playerLivesContainer.innerHTML = '';
+
+    // Display hearts for remaining lives
+    for (let i = 0; i < lives; i++) {
+        const heartEmoji = document.createElement('span');
+        heartEmoji.textContent = '💗'; // Heart emoji
+        playerLivesContainer.appendChild(heartEmoji);
+    }
+
+    // Display skulls for mistakes
+    for (let i = 0; i < mistakes; i++) {
+        const skullEmoji = document.createElement('span');
+        skullEmoji.textContent = '💀'; // Skull emoji
+        playerLivesContainer.appendChild(skullEmoji);
+    }
+}
+
+function submit_score_button_function() {
+    //TODO: Add logic here
+    console.log("Not done yet")
+}
+
+function light_dark_mode(event) {
+        // Toggles the background color and text color of the body element between light and dark mode.
+        //
+        // Parameters:
+        // - event: The event object representing the click event.
+        //
+        // Returns:
+        // None.  (Edits the DOM directly)
+        if (body.style.backgroundColor === "white") {
+            body.style.backgroundColor = "#2b2d42";
+            body.style.color = "white";
+            //change button color using get element by id
+
+        }
+        else {
+            body.style.backgroundColor = "white";
+            body.style.color = "black";
+
+        }
+
+    }
+
+document.getElementById('playButton').addEventListener('click', function() {
+            var video = document.getElementById('videoPlayer');
+            video.style.display = 'block';
+            if (video.paused) {
+                video.play();
+                this.textContent = 'Pause Video';
+            } else {
+                video.pause();
+                this.textContent = 'Play Video';
+            }
+        });
+
+        
+
+        //Event Listeners
+      
+
+// When player clicks start,
+start_game_button.addEventListener("click", start_game_button_function);
+
+
+
+guess_form.addEventListener("submit", guess_submit);
+
+next_question_button.addEventListener("click", next_question_button_function);
+
+
+submit_score.addEventListener("click", submit_score_button_function);
+
+light_setting.addEventListener("click", light_dark_mode);
+
+//Event Listener and Function to turn mute true and false
+mute_setting.addEventListener("click", function() {
+    if (mute === false) {
+        mute = true;
+        videoPlayer.muted = true;
+        mute_setting.textContent = "Unmute";
+    } else {
+        mute = false;
+        videoPlayer.muted = false;
+        mute_setting.textContent = "Mute";
+    }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+    "questions": [
+        {
+            "question": "What is the opposite of 'hot'?",
+            "answers": "Cold",
+            "wrong": ["Warm", "Cool", "Freezing"]
+        },
+        {
+            "question": "Which of these is a synonym for 'happy'?",
+            "answers": "Joyful",
+            "wrong":["Sad", "Angry", "Gloomy"]
+        },
+        {
+            "question": "What is the past tense of 'go'?",
+            "answers": "Went",
+            "wrong":["Goed", "Gone", "Going"]
+        },
+        {
+            "question": "Which of these words is a preposition: apple, under, happy, jump?",
+            "answers": "Under",
+            "wrong":["Apple", "Happy", "Jump"]
+        },
+        {
+            "question": "What is the plural of 'child'?",
+            "answers": "Children",
+            "wrong":["Childs", "Childes", "Child"]
+        },
+        {
+            "question": "Which of these is a type of punctuation: book, comma, run, tree?",
+            "answers": "Comma",
+            "wrong":["Book", "Run", "Tree"]
+        },
+        {
+            "question": "What is the present participle of 'eat'?",
+            "answers": "Eating",
+            "wrong":["Ate", "Eats", "Eaten"]
+        },
+        {
+            "question": "Which of these words is a conjunction: house, and, yellow, quickly?",
+            "answers": "And",
+            "wrong":["House", "Yellow", "Quickly"]
+        },
+        {
+            "question": "What is the opposite of 'big'?",
+            "answers": "Small",
+            "wrong":["Large", "Huge", "Giant"]
+        },
+        {
+            "question": "Which of these is a synonym for 'fast'?",
+            "answers": "Quick",
+            "wrong":["Slow", "Lazy", "Tired"]
+        }
+    ]
+}

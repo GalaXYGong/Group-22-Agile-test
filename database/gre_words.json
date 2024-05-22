@@ -1,0 +1,203 @@
+[
+    {
+      "word": "resilience",
+      "correct": "The ability to recover quickly from difficulties.",
+      "incorrect": [
+        "A type of plant.",
+        "A measurement of speed.",
+        "A type of mineral."
+      ],
+      "example": "Her resilience in the face of adversity inspired everyone around her."
+    },
+    {
+      "word": "exacerbate",
+      "correct": "To make a problem, bad situation, or negative feeling worse.",
+      "incorrect": [
+        "To solve a complex problem.",
+        "To decrease the intensity of something.",
+        "To bring peace to a situation."
+      ],
+      "example": "His criticism only served to exacerbate her insecurities."
+    },
+    {
+      "word": "ubiquitous",
+      "correct": "Present, appearing, or found everywhere.",
+      "incorrect": [
+        "Occurring rarely.",
+        "Only found in specific locations.",
+        "Easily forgotten or overlooked."
+      ],
+      "example": "Smartphones have become ubiquitous in modern society."
+    },
+    {
+      "word": "ephemeral",
+      "correct": "Lasting for a very short time.",
+      "incorrect": [
+        "Persisting for a long duration.",
+        "Consistently present in a specific location.",
+        "Predictable and unchanging."
+      ],
+      "example": "The beauty of the cherry blossoms is ephemeral, lasting only a few weeks each spring."
+    },
+    {
+      "word": "esoteric",
+      "correct": "Intended for or likely to be understood by only a small number of people with a specialized knowledge or interest.",
+      "incorrect": [
+        "Easily understood by the general population.",
+        "Commonly discussed in everyday conversations.",
+        "Lacking depth or complexity."
+      ],
+      "example": "The professor's lecture on quantum physics was so esoteric that few students could follow along."
+    },
+    {
+      "word": "veracity",
+      "correct": "Accuracy, truthfulness, or honesty.",
+      "incorrect": [
+        "Deception or falsehood.",
+        "Exaggeration or hyperbole.",
+        "Manipulation of facts."
+      ],
+      "example": "Journalists are expected to uphold the highest standards of veracity in their reporting."
+    },
+    {
+      "word": "equivocate",
+      "correct": "To use ambiguous language to conceal the truth or avoid committing oneself.",
+      "incorrect": [
+        "To speak clearly and directly.",
+        "To express oneself honestly and openly.",
+        "To avoid speaking altogether."
+      ],
+      "example": "Politicians often equivocate when faced with difficult questions during interviews."
+    },
+    {
+      "word": "proliferate",
+      "correct": "To increase rapidly in number; multiply.",
+      "incorrect": [
+        "To decrease significantly.",
+        "To remain constant.",
+        "To spread misinformation."
+      ],
+      "example": "The use of social media has allowed fake news to proliferate across the internet."
+    },
+    {
+      "word": "disparage",
+      "correct": "To regard or represent as being of little worth; belittle.",
+      "incorrect": [
+        "To praise or commend highly.",
+        "To acknowledge with respect.",
+        "To support or endorse."
+      ],
+      "example": "It is inappropriate to disparage someone's efforts, even if you disagree with them."
+    },
+    {
+      "word": "abate",
+      "correct": "To become less intense or widespread; to reduce in amount, degree, or severity.",
+      "incorrect": [
+        "To increase dramatically.",
+        "To exacerbate a situation.",
+        "To remain constant."
+      ],
+      "example": "The storm's fury finally abated after hours of torrential rain."
+    },
+    {
+      "word": "anomaly",
+      "correct": "Something that deviates from what is standard, normal, or expected.",
+      "incorrect": [
+        "Something that conforms perfectly.",
+        "Something that is unremarkable.",
+        "Something that occurs frequently."
+      ],
+      "example": "The sudden surge in temperature in winter was an anomaly that puzzled meteorologists."
+    },
+    {
+      "word": "capricious",
+      "correct": "Given to sudden and unaccountable changes of mood or behavior.",
+      "incorrect": [
+        "Consistently predictable.",
+        "Stable and unchanging.",
+        "Reserved and cautious."
+      ],
+      "example": "His capricious nature made it difficult for his colleagues to anticipate his reactions."
+    },
+    {
+      "word": "abstain",
+      "correct": "To restrain oneself from doing or enjoying something.",
+      "incorrect": [
+        "To indulge excessively.",
+        "To partake eagerly.",
+        "To encourage others to engage."
+      ],
+      "example": "She chose to abstain from alcohol during the month-long fitness challenge."
+    },
+    {
+      "word": "aggrandize",
+      "correct": "To increase the power, status, or wealth of something or someone; to make something seem greater or more impressive than it is.",
+      "incorrect": [
+        "To diminish or reduce.",
+        "To undermine one's reputation.",
+        "To simplify or minimize."
+      ],
+      "example": "He constantly aggrandized his achievements in an attempt to gain admiration."
+    },
+    {
+      "word": "cajole",
+      "correct": "To persuade someone to do something by sustained coaxing or flattery.",
+      "incorrect": [
+        "To force someone to comply.",
+        "To intimidate or threaten.",
+        "To ignore someone's wishes."
+      ],
+      "example": "She managed to cajole her friend into attending the concert with her."
+    },
+    {
+      "word": "castigate",
+      "correct": "To reprimand someone severely.",
+      "incorrect": [
+        "To praise someone excessively.",
+        "To overlook mistakes.",
+        "To reward bad behavior."
+      ],
+      "example": "The coach castigated the team for their lack of effort during the game."
+    },
+    {
+      "word": "clemency",
+      "correct": "Mercy; lenience.",
+      "incorrect": [
+        "Harshness; severity.",
+        "Rigidity; inflexibility.",
+        "Unfairness; bias."
+      ],
+      "example": "The governor showed clemency by reducing the prisoner's sentence."
+    },
+    {
+      "word": "connoisseur",
+      "correct": "An expert judge in matters of taste or appreciation.",
+      "incorrect": [
+        "A novice or beginner.",
+        "An indifferent or disinterested person.",
+        "An unskilled or incompetent person."
+      ],
+      "example": "He was a connoisseur of fine wines, able to distinguish subtle differences in flavor."
+    },
+    {
+      "word": "conundrum",
+      "correct": "A confusing and difficult problem or question.",
+      "incorrect": [
+        "A straightforward and simple dilemma.",
+        "An easily solvable riddle.",
+        "A clear and unambiguous situation."
+      ],
+      "example": "The mystery of the locked room presented a conundrum that baffled investigators."
+    },
+    {
+      "word": "deleterious",
+      "correct": "Causing harm or damage.",
+      "incorrect": [
+        "Promoting health or well-being.",
+        "Having no effect.",
+        "Beneficial or advantageous."
+      ],
+      "example": "The deleterious effects of smoking on one's health are well-documented."
+    }
+  ]
+  

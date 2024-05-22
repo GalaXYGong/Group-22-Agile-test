@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Result to Flask</title>
+</head>
+<body>
+    <h1>This is a Prototype page, if the update_score is implemented, we should remove this html file</h1>
+    <h1>the score</h1>
+    <h1 id="score_correct_inner">1</h1>
+    <h1>the user id</h1>
+    <h2 id="user_id">1</h2>
+    <h3>the correct questions list (will be transferred into a list)</h3>
+    <p>correct questions id:
+        <span id="correct_questions_id">1,2,3</span>
+    </p>
+    <h3>the incorrect questions list (will be transferred into a list)</h3>
+    <p>incorrect questions id:
+        <span id="incorrect_questions_id">4,5,6</span>
+    <button onclick="Send()">Send</button>
+    <p>The problem for now is when we done a batch of questions, we need to receive 4 things:<br>
+    <ol>
+        <li>the user id</li>
+        <li>the score</li>
+        <li>the correct questions list, the list contains the question_ids</li>
+        <li>the incorrect questions list,the list contains the question_ids</li>
+    </ol>
+    so we can send the data to the server and update the user's score.
+    if you can directly get the lists of questions, you can directly send the lists to the server.
+    if not you can use .split to split the string into a list. (for now we use this approach)
+    </p>
+    <script>
+
+        function Send() {
+            const user_id = document.getElementById('user_id').innerHTML;
+            const score = parseFloat(document.getElementById('score_correct_inner').innerHTML);
+            const correct_questions_id = document.getElementById('correct_questions_id').innerHTML;
+            const incorrect_questions_id = document.getElementById('incorrect_questions_id').innerHTML;
+            // split the string into a list
+            console.log(typeof(correct_questions_id));
+            const correct_questions = correct_questions_id.split(',');
+            const incorrect_questions = incorrect_questions_id.split(',');
+            // convert the string into a list of integers
+            incorrect_questions.forEach((item, index) => {
+                incorrect_questions[index] = parseInt(item);
+            });
+            correct_questions.forEach((item, index) => {
+                correct_questions[index] = parseInt(item);
+            });
+            console.log(typeof(correct_questions));
+            console.log(typeof(score));
+            console.log(correct_questions);
+            console.log(incorrect_questions);
+            // send the data to the server
+            fetch('/question/update_score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    //user_id: user_id,
+                    score: score,
+                    correct_questions: correct_questions,
+                    incorrect_questions: incorrect_questions,
+                    }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Result submitted successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

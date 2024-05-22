@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='questionPage/Question.CSS') }}">
+    
+    <p style="display: none;" id="to_JS"></p>
+    <script>
+
+        questions_list = {{ questions_list|tojson|safe }}
+        console.log(typeof(questions_list));
+        // assign id to_js innder html to questionlist
+        document.getElementById("to_JS").innerHTML = questions_list
+        
+        
+    </script>
+    <script src="{{ url_for('static', filename='questionPage/QuestionPage.js') }}" ></script>
+    
+    
+
+</head>
+<body>
+
+    
+    <header>
+        <div class = 'banner'>
+            <div class = 'banner_content'>
+                <div class="banner_text">
+                    {% if "__" in questions_list %}
+                        <h1 class="banner_text_h1">Choose the Word that Best Completes the Sentence</h1>
+                    {% else %}
+                        <h1 class="banner_text_h1">Choose Correct Definition for the Word</h1>
+                    {% endif %}
+                </div>
+                
+        </div>
+        <h1></h1>
+    </header>
+
+    
+
+    <div id = 'winstreak'></div>
+    <div class = 'score_container'>
+            <div class = 'score'>
+                <h3 id = score_text>Current Score:</h3>
+                <h3 id = score_number>0</h3>
+            </div>
+    </div>
+    <div class = 'question_container'>
+        <h1 id = 'question_text'>hi</h1>
+        <div id = 'choices'>
+            <form id = 'question_form'>
+                <input type="radio"  name="choice" value="a" id ='value1' class = ''>
+                <label for="choice" id='choice1'class="label">{{choice1}}</label><br>
+                <input type="radio"  name="choice" Value = "b" id = 'value2'>
+                <label for="choice" id="choice2"class="label">{{choice2}}</label><br>
+                <input type="radio"  name="choice" Value = "c" id = 'value3'>
+                <label for="choice" id="choice3"class="label">{{choice3}}</label><br>
+                <input type="radio"  name="choice"  Value = "d" id = 'value4'>
+                <label for="choice" id="choice4"class="label">{{choice4}}</label><br>
+                <div id = 'submit_container'><input type="submit" value="submit" id = 'submit_button'></div>
+                
+            </form>
+        </div>
+    </div>
+
+    <div id = 'respone_box'>
+        <div id = 'correct_or_wrong'>
+            <p id = 'answer'  class = 'inline-space'>answer, </p>
+            <p id ='description'>description</p>  
+        </div>
+        <input type = 'submit' id = 'special' value="special Game!">
+        <input type = 'submit' id = 'next_question' value="Next Question">
+         
+
+        </div>
+        
+        
+    </div>
+            
+
+    
+
+
+    
+    
+</body>
+</html>

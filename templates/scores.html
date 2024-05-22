@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\bootstrap\css\Scores.css">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div class = "banner">
+        <h1 id = "TopScores">See the top rankings!</h1>
+        <li class = NavBar>
+            <ul> <a href="{{ url_for('home') }}">Home </a></ul>
+            <ul><a href="{{ url_for('profile') }}">Profile </a></ul>
+                <ul> <form id="logoutForm" action="{{ url_for('logout') }}" method="POST">
+                    <a href="{{ url_for('home') }}" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                </form> </ul>
+        </li>
+    </div>
+
+    
+<div class = "MainBody">
+    <h2 id = "ScoreTitle">Top 10 Scores</h2>
+    <!-- Read scores from flask, make a table and for loop through the scores variable to display scores[0], scores[1] in the table --->
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Score</th>
+        </tr>
+        {% for score in scores %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ score[0] }}</td>
+            <td>{{ score[1] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+    
+</body>
+</html>

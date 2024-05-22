@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'FeatherBold';
+    src: url('/static/font/Feather Bold.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'din-round';
+    src: url('/static/font/DINRoundPro.ttf') format('truetype');
+}
+
+:root {
+    --dark-blue: #353F98;
+    --dark-grey: rgb(54, 51, 71);
+    --hover-blue: #5b6bfd;
+}
+
+.banner{
+    position : relative;
+    background-color: var(--dark-blue);
+    display: grid;
+    grid-template-columns: 23% 53% 23%;
+    width: 100%;
+    height: 20dvh;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.MainBody {
+    position: relative;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+}
+
+#ScoreTitle {
+    text-align: center;
+    font-family: 'din-round', sans-serif;
+    font-size: 5vh;
+    grid-column: 2;
+
+}
+
+table, #ScoreTitle {
+    grid-column: 2;
+}
+
+td, th {
+    text-align: center;
+    font-family: 'din-round', sans-serif;
+    font-size: 3.5vh;
+
+}
+
+#TopScores{
+    text-align: center;
+    font-family: 'din-round', sans-serif;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    font-size: 7vh;
+    grid-column: 2;
+}
+
+body{ 
+    font-family: 'din-round', sans-serif;
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+li{
+    display: inline;
+    list-style: none;
+    text-decoration: none;
+}
+
+li ul {
+    display: inline;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+li a:hover {
+    color: var(--hover-blue);
+}
+
+.NavBar {
+    display: flex;
+    grid-column: 3;
+    justify-self: end;
+    margin-right: 5vw;
+}
+
+.NavBar li{
+    display: flex;
+    justify-items:  right;
+}
+
+@media screen and (max-width: 799px) {
+
+    .banner{
+        display: flex;
+        flex-direction: column;
+    }
+}

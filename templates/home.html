@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Duolingo</title>
+    <link rel="stylesheet" href="static\bootstrap\css\HomePageCSS.css">
+    <script src="static\bootstrap\css\HomePageJS.JS" defer></script>
+
+    <!-- Custom Fonts -->
+    <link href="static\bootstrap\vendor\font-awesome\css\font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <h1>Welcome back {{ username }}</h1>
+<body class = "dark-mode">
+
+    <header>
+        <div class = "banner">
+            <!-- Check if user is loged in -->
+            {% if username %}
+            <h1 id = "Welcome">Welcome {{username}}!</h1>
+            <li class = NavBar>
+                <ul> <a href="{{ url_for('ranking') }}">Ranking </a></ul>
+                <ul><a href="{{ url_for('profile') }}">Profile </a></ul>
+                <ul> <form id="logoutForm" action="{{ url_for('logout') }}" method="POST">
+                    <a href="{{ url_for('home') }}" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                </form> </ul>
+            </li>
+            {% else %}
+            <h1 id = "Welcome">Please Sign-up or Login</h1>
+            <li class = NavBar>
+                <ul> <a href="{{ url_for('register_page') }}">Sign-up</a> </ul>
+                <ul> <a href="{{ url_for('login_page') }}">Login</a> </ul>
+            </li>
+            {% endif %}
+            
+        </div>
+    </header>  
+
+<button class = "dark-mode" id = "DarkModeToggle"></button>
+<div class = "StudyMode">
+    <h2 id = "ModeText">Select Your Study Difficulty Mode:</h2>
+    <button class = "GameModeButton" id = "Game1">Basic Fill in the Blank</button>
+    <button class = "GameModeButton" id = "Game2">GRE Fill in the Blank</button>
+    <button class = "GameModeButton" id = "Game3">Basic Definitions</button>
+    <button class = "GameModeButton" id = "Game4">GRE Defitions</button>
+    <button class = "GameModeButton" id = "Game5">Basic Endless Mode</button>
+    <button class = "GameModeButton" id = "Game6">GRE Endless Mode</button>
+    <!-- <div id="SubmitButtonDiv">
+        <button id = "SubmitButton">Submit</button>
+    </div> -->
+    <!-- link to test_db_data.html -->
+    <a href="{{ url_for('test_db_data') }}">Test DB Data</a>
+    
+</div>
+
+ <!-- jQuery -->
+ <script src="static\bootstrap\vendor\jquery\jquery.min.js"></script>
+
+ <!-- Bootstrap Core JavaScript -->
+ <script src="static\bootstrap\vendor\bootstrap\js\bootstrap.min.js"></script>
+
+ <!-- script to make buttons go to a link when clicked-->
+ <script>
+    document.getElementById("Game1").addEventListener("click", function() {
+        window.location.href = "{{ url_for('question') }}";
+    });
+    document.getElementById("Game2").addEventListener("click", function() {
+        window.location.href = "{{ url_for('question') }}";
+    });
+    document.getElementById("Game3").addEventListener("click", function() {
+        window.location.href = "{{ url_for('definition') }}";
+    });
+    document.getElementById("Game4").addEventListener("click", function() {
+        window.location.href = "{{ url_for('question') }}";
+    });
+    document.getElementById("Game5").addEventListener("click", function() {
+        window.location.href = "{{ url_for('question') }}";
+    });
+    document.getElementById("Game6").addEventListener("click", function() {
+        window.location.href = "{{ url_for('question') }}";
+    });
+    
+</script>
 </body>
 </html>

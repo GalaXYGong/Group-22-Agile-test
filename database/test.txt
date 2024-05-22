@@ -1,0 +1,45 @@
+test
+
+<!-- <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container"> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- <div class="NavBarMobile">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('home') }}">Unolingo</a>
+            </div> -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if not username %}
+                    <li class="page">
+                        <a href="{{ url_for('register_page') }}">Sign-up</a>
+                    </li>
+                    <li class="page">
+                        <a href="{{ url_for('login_page') }}">Login</a>
+                    </li>
+                    {% endif %}
+                    {% if username %}
+                    <li class="page">
+                        
+                    </li>
+                    <li class="page">
+                        <a href="{{ url_for('ranking') }}">Ranking</a>
+                    </li>
+                    <li class="page">
+                        <a href="{{ url_for('profile') }}">Profile: {{ username }}</a>
+                    </li>
+                    <li class="page">
+                        <form id="logoutForm" action="{{ url_for('logout') }}" method="POST">
+                            <a href="{{ url_for('home') }}" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                        </form>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div> -->
+            <!-- /.navbar-collapse -->
+        <!-- </div> -->
+        <!-- /.container-fluid -->
+    <!-- </nav> -->

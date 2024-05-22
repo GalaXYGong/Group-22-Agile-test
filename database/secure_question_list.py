@@ -1,0 +1,1 @@
+secure_questions= ["What is your favorite color?", "What is your favorite food?", "What is your favorite movie?", "What is your favorite book?", "What is your favorite song?", "What name is your favorite pet?", "What is your favorite game?", "What is your favorite TV show?", "What is your favorite car?","Where was you born?", "Which city did you parents met?"]
