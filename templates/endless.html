@@ -9,15 +9,22 @@
     
     <p style="display: none;" id="to_JS"></p>
     <script>
-        questions_list = {{ questions_list|tojson|safe }};
+
+        questions_list = {{ questions_list|tojson|safe }}
         console.log(typeof(questions_list));
         // assign id to_js innder html to questionlist
-        document.getElementById("to_JS").innerHTML = questions_list;
+        document.getElementById("to_JS").innerHTML = questions_list
+        
+        
     </script>
     <script src="{{ url_for('static', filename='questionPage/QuestionPage.js') }}" ></script>
-    <script src="{{ url_for('static', filename='questionPage/DarkMode.js') }}" ></script>
+    
+    
+
 </head>
-<body class="dark-mode">
+<body>
+
+    
     <header>
         <div class = 'banner'>
             <button class = "dark-mode" id = "DarkModeToggle"></button>
@@ -44,12 +51,25 @@
 
     
 
+
+
+    <div class = 'score_container' style="display: none;">
+        <div class = 'score'>
+            <h3 id = score_text>Current Score:</h3>
+            <h3 id = score_number>0</h3>
+        </div>
+    </div>
+
+
     <div id = 'winstreak'></div>
-    <div class = 'score_container'>
-            <div class = 'score'>
-                <h3 id = score_text>Current Score:</h3>
-                <h3 id = score_number>0</h3>
-            </div>
+    
+    
+    <div id = 'time_container'>
+        
+        
+        <div id = 'time'></div>
+        <div id = 'bomb'></div>
+
     </div>
     <div class = 'question_container'>
         <h1 id = 'question_text'>hi</h1>
@@ -63,7 +83,7 @@
                 <label for="choice" id="choice3"class="label">{{choice3}}</label><br>
                 <input type="radio"  name="choice"  Value = "d" id = 'value4'>
                 <label for="choice" id="choice4"class="label">{{choice4}}</label><br>
-                <div id = 'submit_container'><input type="submit" value="Submit" id = 'submit_button'></div>
+                <div id = 'submit_container'><input type="submit" value="submit" id = 'submit_button'></div>
                 
             </form>
         </div>
@@ -83,12 +103,11 @@
         
     </div>
             
-    <script>
-        window.onload = function() {
-            var darkMode = localStorage.getItem('darkMode') === 'true';
-            document.body.classList.toggle("dark-mode", darkMode);
-        };
-    </script>
 
+    
+
+
+    
+    
 </body>
 </html>

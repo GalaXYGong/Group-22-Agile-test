@@ -47,7 +47,7 @@
         "Commonly discussed in everyday conversations.",
         "Lacking depth or complexity."
       ],
-      "example": "The professor's lecture on quantum physics was so esoteric that few students could follow along."
+      "example": "The professor’s lecture on quantum physics was so esoteric that few students could follow along."
     },
     {
       "word": "veracity",
@@ -87,7 +87,7 @@
         "To acknowledge with respect.",
         "To support or endorse."
       ],
-      "example": "It is inappropriate to disparage someone's efforts, even if you disagree with them."
+      "example": "It is inappropriate to disparage someone’s efforts, even if you disagree with them."
     },
     {
       "word": "abate",
@@ -97,7 +97,7 @@
         "To exacerbate a situation.",
         "To remain constant."
       ],
-      "example": "The storm's fury finally abated after hours of torrential rain."
+      "example": "The storm’s fury finally abated after hours of torrential rain."
     },
     {
       "word": "anomaly",
@@ -134,7 +134,7 @@
       "correct": "To increase the power, status, or wealth of something or someone; to make something seem greater or more impressive than it is.",
       "incorrect": [
         "To diminish or reduce.",
-        "To undermine one's reputation.",
+        "To undermine one’s reputation.",
         "To simplify or minimize."
       ],
       "example": "He constantly aggrandized his achievements in an attempt to gain admiration."
@@ -145,7 +145,7 @@
       "incorrect": [
         "To force someone to comply.",
         "To intimidate or threaten.",
-        "To ignore someone's wishes."
+        "To ignore someone’s wishes."
       ],
       "example": "She managed to cajole her friend into attending the concert with her."
     },
@@ -167,7 +167,7 @@
         "Rigidity; inflexibility.",
         "Unfairness; bias."
       ],
-      "example": "The governor showed clemency by reducing the prisoner's sentence."
+      "example": "The governor showed clemency by reducing the prisoner’s sentence."
     },
     {
       "word": "connoisseur",
@@ -197,7 +197,789 @@
         "Having no effect.",
         "Beneficial or advantageous."
       ],
-      "example": "The deleterious effects of smoking on one's health are well-documented."
-    }
-  ]
+      "example": "The deleterious effects of smoking on one’s health are well-documented."
+    },
+    {
+        "word": "aberration",
+        "correct": "A departure from what is normal or expected, typically one that is unwelcome.",
+        "incorrect": [
+            "A type of tree.",
+            "A method of transportation.",
+            "A form of communication."
+        ],
+        "example": "The sudden drop in temperature was an aberration for this time of year."
+    },
+    {
+        "word": "alacrity",
+        "correct": "Brisk and cheerful readiness.",
+        "incorrect": [
+            "A type of bird.",
+            "A type of fish.",
+            "A form of weather."
+        ],
+        "example": "She accepted the challenge with alacrity."
+    },
+    {
+        "word": "ascetic",
+        "correct": "Characterized by severe self-discipline and abstention from all forms of indulgence, typically for religious reasons.",
+        "incorrect": [
+            "A type of fruit.",
+            "A type of vehicle.",
+            "A type of animal."
+        ],
+        "example": "He lived an ascetic life, renouncing all worldly pleasures."
+    },
+    {
+        "word": "chicanery",
+        "correct": "The use of trickery to achieve a political, financial, or legal purpose.",
+        "incorrect": [
+            "A type of clothing.",
+            "A form of art.",
+            "A type of food."
+        ],
+        "example": "The politician was accused of using chicanery to win the election."
+    },
+    {
+        "word": "dearth",
+        "correct": "A scarcity or lack of something.",
+        "incorrect": [
+            "A type of animal.",
+            "A type of plant.",
+            "A mode of transportation."
+        ],
+        "example": "There was a dearth of fresh water in the desert."
+    },
+    {
+        "word": "emulate",
+        "correct": "Match or surpass (a person or achievement), typically by imitation.",
+        "incorrect": [
+            "A type of sport.",
+            "A type of food.",
+            "A form of entertainment."
+        ],
+        "example": "He hoped to emulate his father’s success in business."
+    },
+    {
+        "word": "innocuous",
+        "correct": "Not harmful or offensive.",
+        "incorrect": [
+            "A type of weapon.",
+            "A form of punishment.",
+            "A type of disease."
+        ],
+        "example": "The spider looked innocuous, but it was actually venomous."
+    },
+    {
+        "word": "nebulous",
+        "correct": "In the form of a cloud or haze; hazy.",
+        "incorrect": [
+            "A type of planet.",
+            "A form of precipitation.",
+            "A type of bird."
+        ],
+        "example": "His memories of the event were nebulous, as if seen through fog."
+    },
+    {
+        "word": "obsequious",
+        "correct": "Obedient or attentive to an excessive or servile degree.",
+        "incorrect": [
+            "A type of food.",
+            "A form of transportation.",
+            "A type of building."
+        ],
+        "example": "The waiter was obsequious, constantly hovering and anticipating every need."
+    },
+    {
+        "word": "perfidious",
+        "correct": "Deceitful and untrustworthy.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "He was punished for his perfidious actions against his friends."
+    },
+    {
+        "word": "quixotic",
+        "correct": "Exceedingly idealistic; unrealistic and impractical.",
+        "incorrect": [
+            "A type of weapon.",
+            "A form of transportation.",
+            "A type of food."
+        ],
+        "example": "His quixotic dreams of saving the world often clashed with reality."
+    },
+    {
+        "word": "recalcitrant",
+        "correct": "Having an obstinately uncooperative attitude towards authority or discipline.",
+        "incorrect": [
+            "A type of weather.",
+            "A form of transportation.",
+            "A type of food."
+        ],
+        "example": "The recalcitrant student refused to follow the teacher’s instructions."
+    },
+    {
+        "word": "sanguine",
+        "correct": "Optimistic or positive, especially in an apparently bad or difficult situation.",
+        "incorrect": [
+            "A type of bird.",
+            "A form of weather.",
+            "A type of food."
+        ],
+        "example": "Despite the setback, he remained sanguine about their chances of success."
+    },
+    {
+        "word": "vehement",
+        "correct": "Showing strong feeling; forceful, passionate, or intense.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "She made a vehement protest against the decision."
+    },
+    {
+        "word": "wanton",
+        "correct": "Deliberate and unprovoked, excessive or unrestrained.",
+        "incorrect": [
+            "A type of food.",
+            "A form of transportation.",
+            "A type of building."
+        ],
+        "example": "He indulged in wanton destruction of property."
+    },
+    {
+        "word": "acerbic",
+        "correct": "Sour or bitter in taste; harsh or severe in manner or tone.",
+        "incorrect": [
+            "A type of food.",
+            "A form of transportation.",
+            "A type of building."
+        ],
+        "example": "She was known for her acerbic wit and sharp tongue."
+    },
+      {
+          "word": "banal",
+          "correct": "Lacking in originality; trite.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "His speech was banal, filled with clichés."
+      },
+      {
+          "word": "cacophony",
+          "correct": "A harsh, discordant mixture of sounds.",
+          "incorrect": [
+              "A type of food.",
+              "A form of transportation.",
+              "A type of building."
+          ],
+          "example": "The city streets were filled with the cacophony of honking horns."
+      },
+      {
+          "word": "disseminate",
+          "correct": "To spread or disperse widely.",
+          "incorrect": [
+              "A type of bird.",
+              "A form of weather.",
+              "A type of food."
+          ],
+          "example": "The organization aims to disseminate information about climate change."
+      },
+      {
+          "word": "facetious",
+          "correct": "Treating serious issues with deliberately inappropriate humor.",
+          "incorrect": [
+              "A type of weapon.",
+              "A form of transportation.",
+              "A type of food."
+          ],
+          "example": "His facetious remarks offended some of the audience."
+      },
+      {
+          "word": "furtive",
+          "correct": "Attempting to avoid notice or attention, typically because of guilt or a belief that discovery would lead to trouble; secretive.",
+          "incorrect": [
+              "A type of weather.",
+              "A form of transportation.",
+              "A type of food."
+          ],
+          "example": "She cast a furtive glance in his direction."
+      },
+      {
+          "word": "insipid",
+          "correct": "Lacking flavor; weak or tasteless.",
+          "incorrect": [
+              "A type of bird.",
+              "A form of weather.",
+              "A type of food."
+          ],
+          "example": "The soup was insipid and unappetizing."
+      },
+      {
+          "word": "languid",
+          "correct": "Displaying or having a disinclination for physical exertion or effort; slow and relaxed.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "She lay in a languid pose by the pool."
+      },
+      {
+          "word": "mendacious",
+          "correct": "Not telling the truth; lying.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "The mendacious politician’s promises were not to be trusted."
+      },
+      {
+          "word": "onus",
+          "correct": "Used to refer to something that is one’s duty or responsibility.",
+          "incorrect": [
+              "A type of food.",
+              "A form of transportation.",
+              "A type of building."
+          ],
+          "example": "The onus is on the government to provide adequate healthcare."
+      },
+      {
+          "word": "palliate",
+          "correct": "Make (a disease or its symptoms) less severe or unpleasant without removing the cause.",
+          "incorrect": [
+              "A type of weather.",
+              "A form of transportation.",
+              "A type of food."
+          ],
+          "example": "The medication helped to palliate the pain, but did not cure the illness."
+      },
+      {
+          "word": "quiescent",
+          "correct": "In a state or period of inactivity or dormancy.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "The volcano appeared quiescent, but experts warned of possible eruptions."
+      },
+      {
+          "word": "reprobate",
+          "correct": "An unprincipled person (often used humorously or affectionately).",
+          "incorrect": [
+              "A type of bird.",
+              "A form of weather.",
+              "A type of food."
+          ],
+          "example": "He was considered the reprobate of the family, always getting into trouble."
+      },
+      {
+          "word": "soporific",
+          "correct": "Tending to induce drowsiness or sleep.",
+          "incorrect": [
+              "A type of weapon.",
+              "A form of transportation.",
+              "A type of food."
+          ],
+          "example": "The lecture was so soporific that half the audience fell asleep."
+      },
+      {
+          "word": "tacit",
+          "correct": "Understood or implied without being stated.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "They had a tacit agreement not to discuss the issue further."
+      },
+      {
+          "word": "venerable",
+          "correct": "Accorded a great deal of respect, especially because of age, wisdom, or character.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "The venerable professor was admired by all his students."
+      },
+      {
+          "word": "xenophobia",
+          "correct": "Dislike of or prejudice against people from other countries.",
+          "incorrect": [
+              "A type of bird.",
+              "A form of weather.",
+              "A type of food."
+          ],
+          "example": "His xenophobia was evident in his hostile remarks towards immigrants."
+      },
+      {
+          "word": "yield",
+          "correct": "Produce or provide (a natural, agricultural, or industrial product).",
+          "incorrect": [
+              "A type of weather.",
+              "A form of transportation.",
+              "A type of food."
+          ],
+          "example": "The farm yielded a rich harvest of fruits and vegetables."
+      },
+      {
+          "word": "zenith",
+          "correct": "The highest point reached by a celestial or other object.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "The sun was at its zenith in the afternoon sky."
+      },
+      {
+          "word": "abjure",
+          "correct": "To solemnly renounce (a belief, cause, or claim).",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "He abjured his allegiance to the king."
+      },
+      {
+          "word": "bucolic",
+          "correct": "Relating to the pleasant aspects of the countryside and country life.",
+          "incorrect": [
+              "A type of bird.",
+              "A form of weather.",
+              "A type of food."
+          ],
+          "example": "She enjoyed the bucolic scenery during her weekend retreat to the countryside."
+      },
+      {
+          "word": "clandestine",
+          "correct": "Kept secret or done secretively, especially because illicit.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "The clandestine meeting between the spies took place in a remote location."
+      },
+      {
+          "word": "defenestrate",
+          "correct": "To throw someone out of a window.",
+          "incorrect": [
+              "A type of food.",
+              "A form of transportation.",
+              "A type of building."
+          ],
+          "example": "The mob threatened to defenestrate the corrupt politician."
+      },
+      {
+          "word": "ebullient",
+          "correct": "Cheerful and full of energy.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "She was in an ebullient mood after receiving the good news."
+      },
+      {
+          "word": "fecund",
+          "correct": "Producing or capable of producing an abundance of offspring or new growth; fertile.",
+          "incorrect": [
+              "A type of bird.",
+              "A form of weather.",
+              "A type of food."
+          ],
+          "example": "The soil in the valley was so fecund that crops grew plentifully."
+      },
+      {
+          "word": "garrulous",
+          "correct": "Excessively talkative, especially on trivial matters.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+          ],
+          "example": "The garrulous old man would talk for hours about his past adventures."
+      },
+      {
+          "word": "harangue",
+          "correct": "A lengthy and aggressive speech.",
+          "incorrect": [
+              "A type of weather.",
+              "A form of transportation.",
+              "A type of food."
+          ],
+          "example": "The politician delivered a fiery harangue against his opponents."
+      },
+      {
+          "word": "impecunious",
+          "correct": "Having little or no money.",
+          "incorrect": [
+              "A type of plant.",
+              "A form of weather.",
+              "A type of animal."
+            ],
+          "example": "The impecunious artist struggled to make ends meet."
+      },
+      {
+        "word": "juxtapose",
+        "correct": "To place or deal with close together for contrasting effect.",
+        "incorrect": [
+            "A type of bird.",
+            "A form of weather.",
+            "A type of food."
+        ],
+        "example": "The artist juxtaposed light and dark colors to create a striking contrast."
+    },
+    {
+        "word": "kaleidoscope",
+        "correct": "A constantly changing pattern or sequence of elements.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "The city skyline at night is like a kaleidoscope of lights and colors."
+    },
+    {
+        "word": "lachrymose",
+        "correct": "Tearful or given to weeping.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "The lachrymose widow could not stop crying at the funeral."
+    },
+    {
+        "word": "malinger",
+        "correct": "Exaggerate or feign illness in order to escape duty or work.",
+        "incorrect": [
+            "A type of bird.",
+            "A form of weather.",
+            "A type of food."
+        ],
+        "example": "He was accused of malinger by pretending to be sick to avoid going to school."
+    },
+    {
+        "word": "nocturnal",
+        "correct": "Done, occurring, or active at night.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "Owls are nocturnal birds, hunting for prey under the cover of darkness."
+    },
+    {
+        "word": "obfuscate",
+        "correct": "To render obscure, unclear, or unintelligible.",
+        "incorrect": [
+            "A type of weather.",
+            "A form of transportation.",
+            "A type of food."
+        ],
+        "example": "The politician tried to obfuscate the issue with convoluted explanations."
+    },
+    {
+        "word": "pulchritude",
+        "correct": "Physical beauty.",
+        "incorrect": [
+            "A type of food.",
+            "A form of transportation.",
+            "A type of building."
+        ],
+        "example": "Her pulchritude was admired by all who saw her."
+    },
+    {
+        "word": "quintessential",
+        "correct": "Representing the most perfect or typical example of a quality or class.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "The Eiffel Tower is considered the quintessential symbol of Paris."
+    },
+    {
+        "word": "rapacious",
+        "correct": "Aggressively greedy or grasping.",
+        "incorrect": [
+            "A type of bird.",
+            "A form of weather.",
+            "A type of food."
+        ],
+        "example": "The company’s rapacious pursuit of profits led to unethical business practices."
+    },
+    {
+        "word": "serendipity",
+        "correct": "The occurrence and development of events by chance in a happy or beneficial way.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "Their meeting was pure serendipity, leading to a lifelong friendship."
+    },
+    {
+        "word": "taciturn",
+        "correct": "Reserved or uncommunicative in speech; saying little.",
+        "incorrect": [
+            "A type of bird.",
+            "A form of weather.",
+            "A type of food."
+        ],
+        "example": "The taciturn man rarely spoke unless spoken to."
+    },
+    {
+        "word": "unctuous",
+        "correct": "Excessively flattering or ingratiating; oily.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "His unctuous manner made everyone uncomfortable."
+    },
+    {
+        "word": "vicarious",
+        "correct": "Experienced in the imagination through the feelings or actions of another person.",
+        "incorrect": [
+            "A type of food.",
+            "A form of transportation.",
+            "A type of building."
+        ],
+        "example": "She experienced a vicarious thrill watching her daughter perform on stage."
+    },
+    {
+        "word": "winsome",
+        "correct": "Attractive or appealing in appearance or character.",
+        "incorrect": [
+            "A type of plant.",
+            "A form of weather.",
+            "A type of animal."
+        ],
+        "example": "Her wins ome smile charmed everyone she met."
+    },
+  {
+      "word": "yammer",
+      "correct": "To talk foolishly or incessantly; to whine or complain.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "The children would yammer on during the car ride, much to their parents' annoyance."
+  },
+  {
+      "word": "zealot",
+      "correct": "A person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals.",
+      "incorrect": [
+          "A type of weather.",
+          "A form of transportation.",
+          "A type of food."
+      ],
+      "example": "The zealot refused to consider any viewpoints other than his own."
+  },
+  {
+      "word": "abstemious",
+      "correct": "Not self-indulgent, especially when eating and drinking.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "He lived an abstemious lifestyle, rarely indulging in rich foods or alcohol."
+  },
+  {
+      "word": "boondoggle",
+      "correct": "Work or activity that is wasteful or pointless but gives the appearance of having value.",
+      "incorrect": [
+          "A type of bird.",
+          "A form of weather.",
+          "A type of food."
+      ],
+      "example": "The project turned out to be a boondoggle, wasting time and resources."
+  },
+  {
+      "word": "cogitate",
+      "correct": "To think deeply about something; to ponder or meditate.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "She sat quietly, cogitating on the problem before her."
+  },
+  {
+      "word": "dilatory",
+      "correct": "Slow to act; intended to cause delay.",
+      "incorrect": [
+          "A type of weather.",
+          "A form of transportation.",
+          "A type of food."
+      ],
+      "example": "His dilatory tactics in meetings frustrated his colleagues."
+  },
+  {
+      "word": "eloquent",
+      "correct": "Fluent or persuasive in speaking or writing.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "The speaker was eloquent, holding the audience’s attention throughout."
+  },
+  {
+      "word": "fickle",
+      "correct": "Changing frequently, especially as regards one’s loyalties, interests, or affection.",
+      "incorrect": [
+          "A type of bird.",
+          "A form of weather.",
+          "A type of food."
+      ],
+      "example": "Her fickle nature made it hard to predict her decisions."
+  },
+  {
+      "word": "gregarious",
+      "correct": "Fond of company; sociable.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "He was known for his gregarious personality, always surrounded by friends."
+  },
+  {
+      "word": "impetuous",
+      "correct": "Acting or done quickly and without thought or care.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "Her impetuous decision to quit her job without another lined up led to financial difficulties."
+  },
+  {
+      "word": "jocular",
+      "correct": "Fond of or characterized by joking; humorous or playful.",
+      "incorrect": [
+          "A type of bird.",
+          "A form of weather.",
+          "A type of food."
+      ],
+      "example": "His jocular nature made him popular at social gatherings."
+  },
+  {
+      "word": "kismet",
+      "correct": "Destiny; fate.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "Their meeting was kismet, as if it was meant to be."
+  },
+  {
+      "word": "luminous",
+      "correct": "Full of or shedding light; bright or shining, especially in the dark.",
+      "incorrect": [
+          "A type of food.",
+          "A form of transportation.",
+          "A type of building."
+      ],
+      "example": "The moon cast a luminous glow over the landscape."
+  },
+  {
+      "word": "maverick",
+      "correct": "An unorthodox or independent-minded person.",
+      "incorrect": [
+          "A type of bird.",
+          "A form of weather.",
+          "A type of food."
+      ],
+      "example": "The maverick artist refused to conform to traditional styles."
+  },
+  {
+      "word": "nefarious",
+      "correct": "Wicked or criminal.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "The nefarious activities of the criminal organization were finally exposed."
+  },
+  {
+      "word": "oscillate",
+      "correct": "To move or swing back and forth at a regular speed.",
+      "incorrect": [
+          "A type of weather.",
+          "A form of transportation.",
+          "A type of food."
+      ],
+      "example": "The pendulum oscillated between the two extremes."
+  },
+  {
+      "word": "panacea",
+      "correct": "A solution or remedy for all difficulties or diseases.",
+      "incorrect": [
+          "A type of plant.",
+          "A form of weather.",
+          "A type of animal."
+      ],
+      "example": "Many people mistakenly believe that technology is a panacea for all social problems."
+  },
+  {
+      "word": "quandary",
+      "correct": "A state of perplexity or uncertainty over what to do in a difficult situation.",
+      "incorrect": [
+          "A type of bird.",
+          "A form of weather.",
+          "A type of food."
+      ],
+      "example": "She found herself in a quandary over whether to accept the job offer or stay in her current position."
+  },
+  {
+    "word": "ramification",
+    "correct": "A consequence of an action or event, especially when complex or unwelcome.",
+    "incorrect": [
+        "A type of plant.",
+        "A form of weather.",
+        "A type of animal."
+    ],
+    "example": "The decision to move abroad had many ramifications for his career and personal life."
+},
+{
+    "word": "sagacious",
+    "correct": "Having or showing keen mental discernment and good judgment; wise or shrewd.",
+    "incorrect": [
+        "A type of bird.",
+        "A form of weather.",
+        "A type of food."
+    ],
+    "example": "The sagacious old man was sought after for his wise counsel."
+},
+{
+    "word": "truculent",
+    "correct": "Eager or quick to argue or fight; aggressively defiant.",
+    "incorrect": [
+        "A type of plant.",
+        "A form of weather.",
+        "A type of animal."
+    ],
+    "example": "His truculent behavior often got him into trouble."
+}
+]
+
+  
   

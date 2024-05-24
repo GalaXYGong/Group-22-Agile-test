@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/login.css">
+    <link rel="stylesheet" href="/static/login/forgot.css">
     <title>forgot</title>
 </head>
-<body>
+<body class="dark-mode">
     <div class="banner">
-        <div class="unolingo"><h2>UNOLINGO</h2></div>
+        <h1 id = "Welcome">Unolingo</h1>
     </div>
-    </div>
+    
     <div class="container">
         <div class="logo">
-            <img src="static/trilingo_blue_owl.png" alt="Logo">
+            <img src="/static/login/duck-spin.gif" alt="Logo">
+            <h1>Did you forget your password?</h1>
         </div>
-        <form class="reset-form" action="/auth/forgot" method="post">
-            <h2>Forgot your password?</h2>
-            
-                <input type="text" name="username" placeholder="Username">
-                <button type="submit" value="Submit">Submit</button>
+        <form class="reset-form" action="/forgot" method="post">
+            <input type="text" name="username" placeholder="Enter username" class="input-field">
+            <button type="submit" class="forgot-button">Submit</button>
+        
         </form>
     </div>
 </body>
+    <script>
+        window.onload = function() {
+            var darkMode = localStorage.getItem('darkMode') === 'true';
+            document.body.classList.toggle("dark-mode", darkMode);
+        };
+    </script>
 </html>

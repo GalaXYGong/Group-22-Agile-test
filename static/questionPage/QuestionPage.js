@@ -1,5 +1,10 @@
-
-
+let point = 0;
+let countdownInterval = null;
+let correct_answer = [];
+let incorrect_answer = [];
+let endGameCalled = false; // To ensure endGame is called only once
+let timeLeft = 30;
+let isPaused = false; // Initialize timeLeft outside the function for global access
 
 function resetAnswer() {
     const submitButton = document.querySelector('input[id="submit_button"]');
@@ -8,7 +13,6 @@ function resetAnswer() {
     const answer = document.getElementById('answer');
     const description = document.getElementById('description');
     const submit_container = document.getElementById('submit_container');
-
 
     submit_container.style.alignItems = 'center';
     submit_container.style.display = 'inline-block';
@@ -21,11 +25,10 @@ function resetAnswer() {
     submitButton.style.marginTop = '30px';
     submitButton.style.textAlign = 'center';
     submitButton.style.alignItems = 'center';
-    
 }
-// Global variable to store original display values
 
 function winstreak() {
+    pauseCountdown();
     
     const container = document.getElementById('winstreak');
     const choices = document.getElementById('choices');
@@ -43,6 +46,7 @@ function winstreak() {
     score_box.style.display = 'none';
     container.style.display = 'flex';
     container.innerHTML += '<img id="winstreakImg" src="/static/questionPage/duck-winstreak.gif">'; 
+    
 
     setTimeout(function() {
         question_text.style.display = '';
@@ -52,19 +56,10 @@ function winstreak() {
         container.innerHTML = '';
         banner_text.innerHTML = defaultContent; // Reset text content
         banner.style.backgroundColor = ''; // Reset background color
-        banner_text.style.fontFamily = ''; // Reset font family
+        banner_text.style.fontFamily = '';
+        resumeCountdown();
     }, 3000); // 3 seconds delay (3000 milliseconds)
 }
-
-// Usage
-
-
-// To unhide all elements, call unhideAll()
-// unhideAll();
-
-
-
-
 
 function description(result) {
     const submitButton = document.querySelector('input[id="submit_button"]');
@@ -73,7 +68,7 @@ function description(result) {
     const answer = document.getElementById('answer');
     const description = document.getElementById('description');
 
-    if (result == true) {
+    if (result) {
         descriptionBox.style.backgroundColor = '#D7FFB8';
         next_questionButton.style.color = 'green';
         descriptionBox.style.color = 'green';
@@ -81,9 +76,7 @@ function description(result) {
         answer.innerText = 'correct';
         description.innerText = "  let's go";
         murloc_sound.play();
-    }
-    else {
-        // descriptionBox.style.color = 'white';
+    } else {
         descriptionBox.style.backgroundColor = '#FFDFE0';
         next_questionButton.style.color = 'red';
         descriptionBox.style.color = 'red';
@@ -93,53 +86,14 @@ function description(result) {
     }
     descriptionBox.style.display = 'grid';
     descriptionBox.style.gridTemplateColumns = 'repeat(5, 1fr)';
-    
-    
     submitButton.style.display = 'none';
-
 }
-
 
 function shuffleArray(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
-function checkAnswer(correct) {
-    var form = document.getElementById("question_form");
-
-    form.addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent form submission for this example
-
-        var selectedOption = document.querySelector('input[name="choice"]:checked');
-        if(selectedOption) {
-            console.log("Selected value: ", selectedOption.value);
-
-            if (selectedOption.value === correct) {
-                console.log("Correct answer");
-                description(true);
-            } else {
-                console.log("Wrong answer");
-                description(false);
-            }
-
-
-
-      
-            
-        } else {
-            console.log("No option selected");
-        }
-});
-    
-    
-}
-
-
-
-
-
-
-function displayChoice(incorrect_list,answer) {
+function displayChoice(incorrect_list, answer) {
     const choice1 = document.getElementById('choice1');
     const choice2 = document.getElementById('choice2');
     const choice3 = document.getElementById('choice3');
@@ -150,28 +104,22 @@ function displayChoice(incorrect_list,answer) {
     const input3 = document.getElementById('value3');
     const input4 = document.getElementById('value4');
 
-    all_list = [choice1,choice2,choice3,choice4];
-    all_choice = [incorrect_list[0],incorrect_list[1],incorrect_list[2],answer];
-    all_value = [input1,input2,input3,input4];
-    console.log(answer);
-
+    let all_choice = [incorrect_list[0], incorrect_list[1], incorrect_list[2], answer];
     all_choice = shuffleArray(all_choice);
-    
 
-    for (let i = 0; i < all_list.length; i++) {
-        all_list[i].innerHTML = all_choice[i];
-        all_value[i].value = all_choice[i];
-    }
+    [choice1, choice2, choice3, choice4].forEach((choice, i) => {
+        choice.innerHTML = all_choice[i];
+    });
 
-
-
-
-
+    [input1, input2, input3, input4].forEach((input, i) => {
+        input.value = all_choice[i];
+    });
 }
 
-const next_questionButton = document.getElementById('next_question'); 
-function endGame(win,score,number_of_question,win_streak,question_length){
-    
+function endGame(win, score, number_of_question, win_streak, question_length) {
+    if (endGameCalled) return; // Ensure endGame is called only once
+    endGameCalled = true;
+
     const banner = document.getElementsByClassName('banner')[0];
     const submitButton = document.querySelector('input[id="submit_button"]');
     const descriptionBox = document.getElementById('respone_box');
@@ -181,69 +129,46 @@ function endGame(win,score,number_of_question,win_streak,question_length){
     const description_text = document.getElementById('description');
     const question_text = document.getElementById('question_text');
     const form = document.getElementById("question_form");
-    const duckey = document.createElement("img");
-    duckey.src = '/static/questionPage/angry-duck.gif'
     const choices_form = document.getElementById('choices');
     const respone = document.createElement('h2');
     const respone_des = document.createElement('h3');
-    const nextQuestionButton = document.getElementById('next_question');
-    const ducky_win = document.createElement("img");
+    const ducky = document.createElement("img");
+    const time_container = document.getElementById('time_container');
+
+    if (win) {
+        respone.innerHTML = 'lets go!';
+        ducky.src = '/static/questionPage/duck_win.gif';
+        respone_des.innerHTML = "You did it!";
+    } else {
+        respone.innerHTML = 'Do it again!';
+        ducky.src = '/static/questionPage/angry-duck.gif';
+        respone_des.innerHTML = "You're a failure in every sense of the word.";
+    }
+    ducky.id = 'ducky';
+    respone.id = 'respone_end';
+    if (time_container) {
+        time_container.style.display = 'none';
+    }
+    
+
     const score_outerdiv = document.createElement('div');
     const score_innerdiv = document.createElement('div');
     const score_outerdiv_incorrect = document.createElement('div');
     const score_innerdiv_incorrect = document.createElement('div');
-
     const score_div = document.createElement('div');
-    /////////////////////////////////////////////////
-    ducky_win.src = '/static/questionPage/duck_win.gif'
-
-
-    nextQuestionButton.addEventListener('click', function(event) {
-        window.location.href = '/';
-    })
-
- 
-    score_outerdiv_incorrect.id = 'score_incorrect_outter'
-    score_innerdiv_incorrect.id = 'score_incorrect_inner'
-
-    score_outerdiv.id = 'score_correct_outter'
-    score_innerdiv.id = 'score_correct_inner'
+    score_outerdiv.id = 'score_correct_outter';
+    score_innerdiv.id = 'score_correct_inner';
+    score_outerdiv_incorrect.id = 'score_incorrect_outter';
+    score_innerdiv_incorrect.id = 'score_incorrect_inner';
     score_innerdiv.innerHTML = score;
     score_innerdiv_incorrect.innerHTML = number_of_question - score;
-
-
-
-
-
-    respone.id = 'respone_end';
-    
-    duckey.id = 'ducky';
-    ducky_win.id ='ducky'
-    if (win == true) {
-        respone.innerHTML = 'lets go!';
-        choices_form.appendChild(ducky_win);
-        respone_des.innerHTML ="You did it!";
-
-        
-    } else {
-        respone.innerHTML =  'Do it again!';
-        choices_form.appendChild(duckey);
-        respone_des.innerHTML ="You're a failure in every sense of the word.";
-    }
-    score_div.id = 'score_div';
-
-    
-  
-    choices_form.appendChild(respone);
-    choices_form.appendChild(respone_des);
-    choices_form.appendChild(score_div);
-    choices_form.appendChild(score_outerdiv);
     score_outerdiv.appendChild(score_innerdiv);
-    choices_form.appendChild(score_outerdiv_incorrect);
     score_outerdiv_incorrect.appendChild(score_innerdiv_incorrect);
     score_div.appendChild(score_outerdiv);
     score_div.appendChild(score_outerdiv_incorrect);
-    
+    score_div.id = 'score_div';
+
+    choices_form.append(ducky,respone, respone_des, score_div);
     form.style.display = 'none';
     question_text.style.display = 'none';
     description_text.style.display = 'none';
@@ -251,7 +176,6 @@ function endGame(win,score,number_of_question,win_streak,question_length){
     next_questionButton.style.border = '2px solid rgb(88,204,2)';
     next_questionButton.value = 'Home';
     next_questionButton.style.color = 'white';
-
     correct_wrong.innerHTML = 'lesson review';
     correct_wrong.style.color = 'rgb(229, 229, 229)';
     score_box.style.display = 'none';
@@ -262,45 +186,62 @@ function endGame(win,score,number_of_question,win_streak,question_length){
     banner.style.display = 'none';
     submitButton.style.display = 'none';
 
-
-
-    //show special button
     if (win_streak == question_length) {
         const specialButton = document.getElementById('special');
-
         specialButton.style.display = 'inline-block';
-
-        specialButton.addEventListener('click', function(event) {
+        specialButton.addEventListener('click', function() {
             window.location.href = '/bonus2';
-        })
-
+        });
     }
 
-    
+    next_questionButton.addEventListener('click', function() {
+        
+        window.location.href = '/';
+    })
 
+    clearInterval(countdownInterval); // Stop the countdown
+}
+//endless
+function startCountdown(win,score,number_of_question,question_length) {
+    timeLeft = 30; // Ensure timeLeft is initialized to 30 seconds
+    const countdownElement = document.getElementById('time');
+
+    countdownInterval = setInterval(function() {
+        
+
+        // if no countdown element is found, then stop the function
+        if (!countdownElement) {
+            clearInterval(countdownInterval);
+            return;
+        }
+        countdownElement.style.width = `${timeLeft *25}px`;
+        countdownElement.innerHTML = timeLeft;
+
+        if (timeLeft > 0) {
+            timeLeft--; // Decrease timeLeft by 1 second
+        } else {
+            clearInterval(countdownInterval);
+            countdownElement.style.width = '0px'; // Set the width to 0
+            console.log("score: ", score);
+            console.log("number_of_question: ", number_of_question);
+            
+            endGame(win, score, number_of_question, 0, question_length);
+        }
+    }, 1000);
+}
+function pauseCountdown() {
+    isPaused = true;
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function resumeCountdown() {
+    isPaused = false;
 }
-async function run() {
-    console.log('Start');
-    await sleep(3000); // Sleep for 2 seconds
-    console.log('End');
-}
+
 function Send(incorrect_questions, correct_questions, score) {
+    // Convert the string into a list of integers
+    incorrect_questions = incorrect_questions.map(Number);
+    correct_questions = correct_questions.map(Number);
 
-    // convert the string into a list of integers
-    incorrect_questions.forEach((item, index) => {
-        incorrect_questions[index] = parseInt(item);
-    });
-    correct_questions.forEach((item, index) => {
-        correct_questions[index] = parseInt(item);
-    });
-    console.log(score);
-    console.log(correct_questions);
-    console.log(incorrect_questions);
-    // send the data to the server
     fetch('/question/update_score', {
         method: 'POST',
         headers: {
@@ -310,7 +251,7 @@ function Send(incorrect_questions, correct_questions, score) {
             score: score,
             correct_questions: correct_questions,
             incorrect_questions: incorrect_questions,
-            }),
+        }),
     })
     .then(response => response.json())
     .then(data => {
@@ -321,56 +262,48 @@ function Send(incorrect_questions, correct_questions, score) {
         console.error('Error:', error);
     });
 }
+
 oof_sound = new Audio('/static/assets/oof.mp3');
 murloc_sound = new Audio('/static/assets/murloc.mp3');
 murloc_sound.preload = 'auto';
 oof_sound.preload = 'auto';
 
-let correct_answer =[];
-let incorrect_answer =[];
-// __main__
 document.addEventListener('DOMContentLoaded', function() {
     const winS = document.getElementById('winstreak');
     winS.style.display = 'none';
-    // get the data
+
     const respone_box = document.getElementById('respone_box');
-    let point = 0;
     const score = document.getElementById('score_number');
     const elementHtml = document.getElementById('to_JS').innerHTML;
     const full_object = JSON.parse(elementHtml);
-    console.log(full_object);
     const number_of_question = full_object.length;
     let win_streak = 0;
-    respone_box.style.display = 'none';
+    questionCount = 0;
     let index = 0;
-    const nextQuestionButton = document.getElementById('next_question');
-    const form = document.getElementById("question_form");
-    
 
-    // Attach the form submit event listener once
+    respone_box.style.display = 'none';
+
+    const form = document.getElementById("question_form");
     form.addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent form submission
 
         var selectedOption = document.querySelector('input[name="choice"]:checked');
         if (selectedOption) {
             console.log("Selected value: ", selectedOption.value);
-
             if (selectedOption.value === full_object[index - 1].correct) {
-                
                 console.log("Correct answer");
+                timeLeft += 2; // Add 2 seconds if answer is correct
                 point += 1;
                 score.innerHTML = point;
+                console.log(point);
                 win_streak += 1;
                 correct_answer.push(full_object[index - 1].id);
                 description(true);
-
             } else {
                 win_streak = 0;
                 console.log("Wrong answer");
                 incorrect_answer.push(full_object[index - 1].id);
                 description(false);
-                
-                
             }
         } else {
             description(false);
@@ -378,32 +311,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Function to display the current question
     function displayQuestion(question_list, index) {
         if (index >= question_list.length) {
             return alert('No more questions');
         }
-        let currentQuestion = question_list[index].question;
         const questionElement = document.getElementById('question_text');
-        questionElement.innerHTML = currentQuestion;
+        questionElement.innerHTML = question_list[index].question;
     }
 
-
-
-    // Initialize the first question
     displayQuestion(full_object, index);
     displayChoice(full_object[index].incorrect_list, full_object[index].correct);
     index++;
     
-    // Event listener for next question button
+    const nextQuestionButton = document.getElementById('next_question');
     nextQuestionButton.addEventListener('click', function(event) {
         event.preventDefault();
+        console.log(point);
         if (index < full_object.length) {
-            console.log(win_streak);
             if (win_streak === 3) {
-                
                 winstreak();
-              
+                timeLeft += 5;
+                win_streak = 0;
             }
             displayQuestion(full_object, index);
             displayChoice(full_object[index].incorrect_list, full_object[index].correct);
@@ -411,20 +339,37 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("question_form").reset();
             resetAnswer();
         } else {
-            if (point < number_of_question / 2) {
-                console.log("You lose");
-                endGame(false,point,number_of_question,win_streak,full_object.length);
-            } else {
-                console.log('you win');
-                endGame(true, point,number_of_question,win_streak,full_object.length);
-            }
+            const win = point >= number_of_question / 2;
+            endGame(win, point, number_of_question, win_streak, full_object.length);
             Send(incorrect_answer, correct_answer, point);
-
-            
         }
     });
+
+    function startCountdown() {
+        timeLeft = 30; // Ensure timeLeft is initialized to 30 seconds
+        const countdownElement = document.getElementById('time');
+
+        countdownInterval = setInterval(function() {
+            if (!countdownElement) {
+                clearInterval(countdownInterval);
+                return;
+            }
+            countdownElement.style.width = `${timeLeft * 25}px`;
+            countdownElement.innerHTML = timeLeft;
+
+            if (timeLeft > 0 && !isPaused) {
+                timeLeft--; // Decrease timeLeft by 1 second
+            } 
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                countdownElement.style.width = '0px'; // Set the width to 0
+                const win = point >= number_of_question / 2;
+                endGame(win, point, number_of_question, 0, full_object.length);
+                
+            }
+        }, 1000);
+    }
+
+
+    startCountdown();
 });
-
-
-
-

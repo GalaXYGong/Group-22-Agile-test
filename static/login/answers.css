@@ -27,6 +27,7 @@
     left: 0;
 }
 
+
 #Welcome {
     text-align: center;
     font-family: 'din-round', sans-serif;
@@ -35,9 +36,6 @@
     padding: 0px;
     font-size: 7vh;
     grid-column: 2;
-}
-#loginMessage {
-    font-family: sans-serif;
 }
 
 .container {
@@ -58,9 +56,10 @@ h2 {
     font-size: 20px;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #000000;
 }
+
 .logo {
     margin-bottom: 20px;
 }
@@ -73,28 +72,31 @@ h2 {
     display: inline-block;
 }
 
-.login-form {
-    width: 500px;
-    width: 500px;
+.answers-form {
+    width: 600px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-}
-.reset-form {
-    width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-
+    align-items: center;
 }
 
-.login-form h2 {
-    margin-bottom: 20px;
-    font-size: 18px;
+#answers-label{
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+#answers-label p {
+    display: block;
+    font-size: 20px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #000000;
 }
 
@@ -110,17 +112,10 @@ h2 {
     font-size: 20px;
 }
 
-.input-signup {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #dfd9d9;
-    background-color: #ffffff;
-    text-align: center;
-    color: #000000;
-    border-radius: 4px;
-    font-size: 14px;
-
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    color: #6c757d;
 }
 
 .input-field::placeholder {
@@ -129,8 +124,7 @@ h2 {
 
 .forgot-password {
     text-align: right;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .forgot-password a {
@@ -139,7 +133,7 @@ h2 {
     font-size: 15px;
 }
 
-.login-button {
+.answers-button {
     width: 85%;
     padding: 10px;
     background-color: #353F98;
@@ -151,18 +145,8 @@ h2 {
     font-weight: bold;
 }
 
-.login-button:hover {
+.answers-button:hover {
     background-color: #353F98;
-}
-
-.signup-link {
-    margin-top: 30px;
-    font-size: 15px;
-}
-
-.signup-link a {
-    color: #353F98;
-    text-decoration: none;
 }
 
 body.dark-mode {
@@ -190,8 +174,8 @@ body.dark-mode {
 #DarkModeToggle.dark-mode:hover {
     background-color: var(--hover-blue);
 }
-/* 
-.alert {
+
+/* .alert {
     padding: 20px;
     background-color: #f44336; 
     color: white;

@@ -1,66 +1,139 @@
 import unittest
-from model import Word, select_word, get_question_dict
+from model import *
+from manage import *
+from unittest import mock
+import user_crud_func
+import sqlite3
+import pytest
+@pytest.fixture
+def mock_cursor():
+    with mock.patch('manage.cursor') as mock_cursor:
+        yield mock_cursor
 
-class TestWord(unittest.TestCase):
-    def setUp(self):
-        self.word = Word("apple", "ˈæpəl", 1, ["A type of bird.", "An underwater creature.", "A mode of transportation."], "I enjoy eating a juicy apple for breakfast.")
+@pytest.fixture
+def mock_connection():
+    with mock.patch('manage.connection') as mock_connection:
+        yield mock_connection
 
-    def test_init(self):
-        self.assertEqual(self.word.word, "apple")
-        self.assertEqual(self.word.phonetics, "ˈæpəl")
-        self.assertEqual(self.word.correct, 1)
-        self.assertEqual(self.word.incorrect_list, ["A type of bird.", "An underwater creature.", "A mode of transportation."])
-        self.assertEqual(self.word.word_example, "I enjoy eating a juicy apple for breakfast.")
+def test_select_word():
+    word_test = "apple"
+    data = [
+        {"word": "apple", "correct": "A fruit", "incorrect": ["A color", "A car", "A movie"], "example": "I ate an apple."},
+        {"word": "banana", "correct": "A fruit", "incorrect": ["A color", "A car", "A movie"], "example": "I ate a banana."},
+    ]
+    table = "QUESTION_DEFINITION"
+    drop(table)
+    statement_question_table = f"""CREATE TABLE IF NOT EXISTS {table}
+                    (id  INTEGER PRIMARY KEY AUTOINCREMENT,
+                    word  TEXT NOT NULL UNIQUE,
+                    correct TEXT NOT NULL,
+                    incorrect TEXT NOT NULL,
+                    weight INTEGER DEFAULT 1,
+                    phonetics_url TEXT,
+                    example TEXT);"""
+    execute(statement_question_table)
+    for word in data:
+        word = replace_s(word)
+        word_tuple = get_meaning_phone(word["word"],data)
+        # make it into an object
+        word_for_question = Word(word_tuple[0],word_tuple[1],word_tuple[2],word_tuple[3],word_tuple[4])
+        # make it into a dictionary for json
+        word_for_question_dictionary = word_for_question.__dict__
+        # append the dictionary into table question_definition of database
+        statement= f"""INSERT INTO {table}
+                    (word, correct, incorrect,phonetics_url, example) 
+                    VALUES ('{word_for_question_dictionary['word']}', 
+                        '{word_for_question_dictionary['correct']}', 
+                        '{json.dumps(word_for_question_dictionary['incorrect_list'])}',
+                        '{word_for_question_dictionary['phonetics']}', 
+                        "{word_for_question_dictionary['word_example']}")"""
+        execute(statement)
+    result = select_word(table,word_test)[1:]
+    expected_result = ('apple', 'A fruit', '["A color", "A car", "A movie"]', 1, '', 'I ate an apple.')
+    assert result == expected_result
 
-    def test_str(self):
-        self.assertEqual(str(self.word), "apple ˈæpəl 1 ['A type of bird.', 'An underwater creature.', 'A mode of transportation.'] I enjoy eating a juicy apple for breakfast.")
 
-    def test_choose_word(self):
-        data = ["apple", "banana", "cherry", "durian"]
-        self.word.choose_word(data)
-        self.assertEqual(self.word.correct, "apple")
-        self.assertEqual(len(self.word.incorrect_list), 3)
-        self.assertNotIn("apple", self.word.incorrect_list)
-        self.assertIn(self.word.incorrect_list[0], data)
-        self.assertIn(self.word.incorrect_list[1], data)
-        self.assertIn(self.word.incorrect_list[2], data)
+def test_get_question_dict():
+    word_test = "apple"
+    data = [
+        {"word": "apple", "correct": "A fruit", "incorrect": ["A color", "A car", "A movie"], "example": "I ate an apple."},
+        {"word": "banana", "correct": "A fruit", "incorrect": ["A color", "A car", "A movie"], "example": "I ate a banana."},
+    ]
+    table = "QUESTION_DEFINITION"
+    drop(table)
+    statement_question_table = f"""CREATE TABLE IF NOT EXISTS {table}
+                    (id  INTEGER PRIMARY KEY AUTOINCREMENT,
+                    word  TEXT NOT NULL UNIQUE,
+                    correct TEXT NOT NULL,
+                    incorrect TEXT NOT NULL,
+                    weight INTEGER DEFAULT 1,
+                    phonetics_url TEXT,
+                    example TEXT);"""
+    execute(statement_question_table)
+    for word in data:
+        word = replace_s(word)
+        word_tuple = get_meaning_phone(word["word"],data)
+        # make it into an object
+        word_for_question = Word(word_tuple[0],word_tuple[1],word_tuple[2],word_tuple[3],word_tuple[4])
+        # make it into a dictionary for json
+        word_for_question_dictionary = word_for_question.__dict__
+        # append the dictionary into table question_definition of database
+        statement= f"""INSERT INTO {table}
+                    (word, correct, incorrect,phonetics_url, example) 
+                    VALUES ('{word_for_question_dictionary['word']}', 
+                        '{word_for_question_dictionary['correct']}', 
+                        '{json.dumps(word_for_question_dictionary['incorrect_list'])}',
+                        '{word_for_question_dictionary['phonetics']}', 
+                        "{word_for_question_dictionary['word_example']}")"""
+        execute(statement)
+    result = get_question_dict(table,1)
+    expected_result = {'id': 1, 'word': 'apple', 'correct': 'A fruit', 'incorrect_list': '["A color", "A car", "A movie"]', 'weight': 1, 'phonetics': '', 'example': 'I ate an apple.'}
+    print(result)
+    print(expected_result)
+    assert result == expected_result
 
-class TestSelectWord(unittest.TestCase):
-    def test_select_word(self):
-        result = select_word("QUESTION_DEFINITION", "apple")
-        self.assertIsInstance(result, tuple)
-        self.assertEqual(len(result), 6)
-        self.assertEqual(result[0], 1)
-        self.assertEqual(result[1], "apple")
-        self.assertEqual(result[2], "A round fruit with seeds.")
-        self.assertEqual(result[3], '["A type of bird.", "An underwater creature.", "A mode of transportation."]')
-        self.assertEqual(result[4], 1)
-        self.assertEqual(result[5], "I enjoy eating a juicy apple for breakfast.")
-
-class TestGetQuestionDict(unittest.TestCase):
-    def test_get_question_dict_with_word(self):
-        result = get_question_dict("QUESTION_DEFINITION", "apple")
-        self.assertIsInstance(result, dict)
-        self.assertEqual(len(result), 7)
-        self.assertEqual(result["id"], 1)
-        self.assertEqual(result["word"], "apple")
-        self.assertEqual(result["correct"], 1)
-        self.assertEqual(result["incorrect_list"], '["A type of bird.", "An underwater creature.", "A mode of transportation."]')
-        self.assertEqual(result["weight"], 1)
-        self.assertEqual(result["phonetics"], "ˈæpəl")
-        self.assertEqual(result["example"], "I enjoy eating a juicy apple for breakfast.")
-
-    def test_get_question_dict_with_id(self):
-        result = get_question_dict("QUESTION_DEFINITION", 1)
-        self.assertIsInstance(result, dict)
-        self.assertEqual(len(result), 7)
-        self.assertEqual(result["id"], 1)
-        self.assertEqual(result["word"], "apple")
-        self.assertEqual(result["correct"], 1)
-        self.assertEqual(result["incorrect_list"], '["A type of bird.", "An underwater creature.", "A mode of transportation."]')
-        self.assertEqual(result["weight"], 1)
-        self.assertEqual(result["phonetics"], "ˈæpəl")
-        self.assertEqual(result["example"], "I enjoy eating a juicy apple for breakfast.")
-
-if __name__ == "__main__":
-    unittest.main()
+def test_generate_question_list():
+    word_test = "apple"
+    data = [
+        {"word": "apple", "correct": "A fruit", "incorrect": ["A color", "A car", "A movie"], "example": "I ate an apple."},
+        {"word": "banana", "correct": "A fruit", "incorrect": ["A color", "A car", "A movie"], "example": "I ate a banana."},
+    ]
+    table = "QUESTION_DEFINITION"
+    drop(table)
+    statement_question_table = f"""CREATE TABLE IF NOT EXISTS {table}
+                    (id  INTEGER PRIMARY KEY AUTOINCREMENT,
+                    word  TEXT NOT NULL UNIQUE,
+                    correct TEXT NOT NULL,
+                    incorrect TEXT NOT NULL,
+                    weight INTEGER DEFAULT 1,
+                    phonetics_url TEXT,
+                    example TEXT);"""
+    execute(statement_question_table)
+    for word in data:
+        word = replace_s(word)
+        word_tuple = get_meaning_phone(word["word"],data)
+        # make it into an object
+        word_for_question = Word(word_tuple[0],word_tuple[1],word_tuple[2],word_tuple[3],word_tuple[4])
+        # make it into a dictionary for json
+        word_for_question_dictionary = word_for_question.__dict__
+        # append the dictionary into table question_definition of database
+        statement= f"""INSERT INTO {table}
+                    (word, correct, incorrect,phonetics_url, example) 
+                    VALUES ('{word_for_question_dictionary['word']}', 
+                        '{word_for_question_dictionary['correct']}', 
+                        '{json.dumps(word_for_question_dictionary['incorrect_list'])}',
+                        '{word_for_question_dictionary['phonetics']}', 
+                        "{word_for_question_dictionary['word_example']}")"""
+        execute(statement)
+    result = generate_question_list(2,2,table)
+    new_result = []
+    for question in eval(result):
+        question.pop('id')
+        new_result.append(question)
+    expected_result = '[{"question": "I ate a banana.", "incorrect_list": ["A color", "A car", "A movie"], "correct": "A fruit"},{"question": "I ate an apple.", "incorrect_list": ["A color", "A car", "A movie"], "correct": "A fruit"}]'
+    expected_result= eval(expected_result)
+    new_result= sorted(new_result,key = lambda x: x['question'])
+    print(new_result)
+    print(expected_result)
+    assert new_result == expected_result
+    drop(table)

@@ -17,11 +17,12 @@
     <header>
         <div class = "banner">
             <!-- Check if user is loged in -->
+            <button class = "dark-mode" id = "DarkModeToggle"></button>
             {% if username %}
             <h1 id = "Welcome">Welcome {{username}}!</h1>
             <li class = NavBar>
                 <ul> <a href="{{ url_for('ranking') }}">Ranking </a></ul>
-                <ul><a href="{{ url_for('profile') }}">Profile </a></ul>
+                <ul><a href="{{ url_for('profile') }}">Profile</a></ul>
                 <ul> <form id="logoutForm" action="{{ url_for('logout') }}" method="POST">
                     <a href="{{ url_for('home') }}" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
                 </form> </ul>
@@ -37,7 +38,7 @@
         </div>
     </header>  
 
-<button class = "dark-mode" id = "DarkModeToggle"></button>
+
 <div class = "StudyMode">
     <h2 id = "ModeText">Select Your Study Difficulty Mode:</h2>
     <button class = "GameModeButton" id = "Game1">Basic Fill in the Blank</button>
@@ -50,7 +51,7 @@
         <button id = "SubmitButton">Submit</button>
     </div> -->
     <!-- link to test_db_data.html -->
-    <a href="{{ url_for('test_db_data') }}">Test DB Data</a>
+    <!-- <a href="{{ url_for('test_db_data') }}">Test DB Data</a> -->
     
 </div>
 
@@ -75,12 +76,15 @@
         window.location.href = "{{ url_for('question') }}";
     });
     document.getElementById("Game5").addEventListener("click", function() {
-        window.location.href = "{{ url_for('question') }}";
+        window.location.href = "{{ url_for('endless') }}";
     });
     document.getElementById("Game6").addEventListener("click", function() {
         window.location.href = "{{ url_for('question') }}";
     });
-    
+    window.onload = function() {
+    var darkMode = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle("dark-mode", darkMode);
+    }
 </script>
 </body>
 </html>

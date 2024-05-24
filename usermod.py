@@ -26,6 +26,12 @@ def select_id(table_name:str, id:int, column_name="*") -> tuple:
     # print(result)
     return result
 
+def select_max_id_by_account(table_name: str, account: int, column_name="*") -> tuple:
+    statement = f"SELECT {column_name} FROM {table_name} WHERE account_id = {account} ORDER BY id DESC LIMIT 1"
+    rows = cursor.execute(statement)
+    result = rows.fetchone()
+    return result
+
 def update(table_name, column_name, value, condition):
     value = f"'{value}'"
     statement_update = f"UPDATE {table_name} SET {column_name} = {value} WHERE {condition}"
