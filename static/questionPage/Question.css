@@ -12,25 +12,6 @@
     font-family: "eudox";
     src: url('/static/font/EudoxusSans-Bold.ttf') format('truetype');
 }
-
-@font-face {
-    font-family: 'FeatherBold';
-    src: url('/static/font/Feather Bold.ttf') format('truetype');
-
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'din-round';
-    src: url('/static/font/DINRoundPro.ttf') format('truetype');
-}
-
-:root {
-    --dark-blue: #353F98;
-    --dark-grey: rgb(54, 51, 71);
-    --hover-blue: #5b6bfd;
-}
-
 header{
     margin: 0;
     padding: 0;
@@ -41,62 +22,26 @@ body{
 }
 .banner{
     background-color: #353F98;
-    display: grid;
-    position : relative;
-    grid-template-columns: 33% 33% 33%;
-    width: 100%;
-    height: 20dvh;
-    margin: 0px;
-    padding: 0px;
-    justify-content: center;
-    align-items: center;
-}
-.banner_content{
-grid-column: 2;
-display: grid;     
-}
-
-.banner_text{
-    text-align: center;
-    font-family: 'din-round', sans-serif;
-    color: white;
-    margin: 0px;
-    padding: 0px;
-    font-size: 2vh;
-}
-
-.NavBar {
-    display: flex;
-    grid-column: 3;
-    justify-self: end;
-    margin-right: 5vw;
-    font-family: 'din-round', sans-serif;
-}
-
-.NavBar li{
-    display: flex;
-    justify-items:  right;
-    display: inline;
-    list-style: none;
-    text-decoration: none;
+   
+    
     
 }
-
-.NavBar li ul {
-    display: inline;
+.banner_content{
+    display: absolute;
+    justify-content: center;
+    align-items: center;
+    padding-top: 12px;
+    padding-bottom: 15px;
+    color: #fff;
+    
 }
+.banner_text{
+    text-align: center;
+    font-family: "GabrielSans-bold";
+    font-size: medium;
+    font-weight: bolder;
 
-li a:hover {
-    color: var(--hover-blue);
 }
-
-li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1em;
-}
-
 .score_container{
    
     justify-content: center;
@@ -111,7 +56,6 @@ li a {
     border-radius: 30px;
     margin-left: 30px;
     padding : 10px;
-    margin-top: 10px;
     
 
     
@@ -121,7 +65,7 @@ li a {
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-family: 'din-round',sans-serif;
+    font-family: "GabrielSans-normal";
     font-size: 15px;
     padding: 0;
     margin: 0;
@@ -141,11 +85,9 @@ li a {
 .question_container{
     margin-top: 50px;
     text-align: center;
-    font-family: sans-serif;
+    font-family: "eudox";
     display: flex;
     flex-direction: column;
-    /* background-color: white; */
-   
 }
 
 div#choices input,label{
@@ -163,44 +105,12 @@ div#choices input,label{
     border-radius: 15px;
     margin-top: 30px;
     cursor: pointer;
-    font-family: 'din-round', sans-serif;
+    font-family: "eudox";
     font-size: 20px;
     transition: background-color 0.3s ease;
     text-align: center;
     align-items: center;
 
-}
-.button{
-    display: inline-block;
-    background-color: #353F98;
-    color: #fff;
-    border: none;
-    padding: 4px 23px;
-    border-radius: 15px;
-
-    cursor: pointer;
-    font-family: "eudox";
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    align-items: center;
-    margin: 30px;
-}
-.button{
-    display: inline-block;
-    background-color: #353F98;
-    color: #fff;
-    border: none;
-    padding: 4px 23px;
-    border-radius: 15px;
-
-    cursor: pointer;
-    font-family: "eudox";
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    align-items: center;
-    margin: 30px;
 }
   
 #question_form input[type="submit"]:hover {
@@ -238,7 +148,7 @@ div#choices input,label{
     margin-left: 5vw;
     display: flex;
     text-align: center;
-    font-family: 'din-round', sans-serif;
+    font-family: 'eudox';
     display: inline-flex;
     position: relative;
 }
@@ -248,7 +158,7 @@ div#choices input,label{
 
     display:inline-block ;
 
-    font-family: 'din-round', sans-serif;
+    font-family: 'eudox';
     background-color: transparent;
     color: #fff;
     border: 2px solid #fff;
@@ -308,7 +218,7 @@ div#choices input,label{
     width: 80px;
     align-items: center;
     justify-content: center;
-    background-color: #78C745;
+    background-color: #95f44c;
     margin: 0px;
 
     border-radius: 10px;
@@ -368,9 +278,6 @@ div#choices input,label{
 
     display:none ;
 
-    
-    
-
     font-family: 'eudox';
     background-color: #FFD117;
     color: #fff;
@@ -384,133 +291,4 @@ div#choices input,label{
     transition: box-shadow 0.3s ease;
     grid-column: 4;
     padding: 10px 0 10px 0 ;
-}
-
-#time_container {
-    height: 25px;
-    width: auto;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    margin-right: 20%;
-    margin-left: 20%;
-    border-radius: 25px;
-    display: flex;
-    position: relative; /* Add position relative to the outer div */
-  }
-  
-  #time {
-    width: calc(100% - 50px); /* Adjust the width of the inner div based on the outer div's width */
-    height: 10px;
-
-    background-color: #fff;
-    border-radius: 3px;
-    position: absolute; /* Add position absolute to the inner div */
-    left: 0; /* Start the inner div from the right */
-    top: 50%; /* Center the inner div vertically */
-    transform: translateY(-50%); /* Adjust the position of the inner div */
-    padding-right: -20px;
-}
-
-
-#bomb {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 70px;
-    height: 70px;
-    background-image: url('/static/Endless/bomb.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    
-}
-
-body.dark-mode {
-    background-color:var(--dark-grey);
-    color: white;
-}
-
-#DarkModeToggle {
-    width: 70px;
-    height: 45px;
-    border-radius: 10%;
-    border: none;
-    background-color: var(--dark-grey);
-    border: #353F98 2px solid;
-    margin-left: 5vw;
-    font-family: 'din-round', sans-serif;
-}
-
-#DarkModeToggle:hover {
-    background-color: var(--hover-blue);
-}
-
-#DarkModeToggle.dark-mode {
-    background-color: white;
-}
-
-#DarkModeToggle.dark-mode:hover {
-    background-color: var(--hover-blue);
-}
-#pageSettings{
-    position: relative;
-    padding: 1.5rem 4.5rem 4.5rem;
-}
-#second_box{
-    display: flex;
-    justify-content: space-between;
-    font-family: sans-serif;
-    
-}
-
-.QuestionReview{
-    display: flex;
-    height: 80px;
-    width: auto;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    justify-content: center;
-    margin-bottom: 20px;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
-
-}
-.QuestionReview .front,
-.QuestionReview .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.flipped {
-    transform: rotateX(180deg);
-  }
-#reviewbody{
-
-background-color: #F6F7FB;
-
-}
-#questionList{
-    font-family: sans-serif;
-}
-.QuestionReview p {
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-  }
-
-/* ------------------------------------- MOBILE ----------------------------------------- */
-@media screen and (max-width: 1000px) {
-
-.banner{
-    display: flex;
-    flex-direction: column;
-}
-
-#DarkModeToggle {
-    order: 3;
-    margin: auto;
-}
-    
 }

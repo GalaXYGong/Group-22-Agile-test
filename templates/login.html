@@ -6,39 +6,42 @@
     <link rel="stylesheet" href="/static/login/login.css">
     <title>UNOLINGO-Login</title>
 </head>
-<body class="dark-mode">
+<body>
     <div class="banner">
-        <h1 id = "Welcome">Unolingo</h1>
+        <div class="unolingo"><h2>UNOLINGO</h2></div>
+        <div class="options">
+            <!-- <ul>
+                <li>SIGN-UP</li>
+                <li>LOGIN</li>
+                <li>QUIZ</li>
+                <li>ACCOUNT</li>
+                <li>RANK</li>
+            </ul>
+        </div> -->
     </div>
-
     <div class="container">
         <div class="logo">
             <img src="/static/login/duck-spin.gif" alt="Logo">
-            <h1>Welcome back to Unolingo</h1>
-            <h2>Login into your account</h2>
-            
         </div>
         <form class="login-form" action="/auth/login" method="POST">
-            <input id="login-input" type="username" name="username" placeholder="username" class="input-field">
-            <input id="login-input" type="password" name="password" placeholder="password" class="input-field">
+            <h2 id="loginMessage">Login into your account</h2>
+            <input type="username" name="username" placeholder="username" class="input-field">
+            <input type="password" name="password" placeholder="password" class="input-field">
             <div class="forgot-password">
-                <a href="{{ url_for('forgot') }}">Forgot Password?</a>
+                <a href="{{ url_for('forgot_page') }}">Forgot Password?</a>
             </div>
             <button type="submit" class="login-button">Login</button>
             <div class="signup-link">
                 <p>Don't have an account? <a href="{{ url_for('register_page') }}">Sign up</a></p>
             </div>
-            
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
         </form>
     </div>
-</div>
-    </div>
-</div>
 </body>
-    <script>
-        window.onload = function() {
-            var darkMode = localStorage.getItem('darkMode') === 'true';
-            document.body.classList.toggle("dark-mode", darkMode);
-        };
-    </script>
 </html>

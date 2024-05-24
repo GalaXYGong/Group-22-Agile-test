@@ -1,14 +1,8 @@
 # a simple login page using flask for testing the usermod.py
 from flask import Flask, render_template, url_for, request, redirect, session, flash,jsonify
 from model import Word, get_question_dict,generate_question_list
-from user_crud_func import auth, sign_up, select_all, show_secure_question,update,update_score,read_question_account
-import ast
-
-from usermod import execute, select_all, update, check_secure_question, select_password,select_max_id_by_account,select_id
-from user_crud_func import auth, sign_up, select_all, show_secure_question,update,update_score,read_question_account
-import ast
-
-from usermod import execute, select_all, update, check_secure_question, select_password,select_max_id_by_account,select_id
+from user_crud_func import auth, sign_up, select_all, show_secure_question,update,update_score
+from usermod import execute, select_all, update, check_secure_question, select_password
 from manage import return_all_secure_question
 import secrets 
 import json
@@ -35,7 +29,13 @@ def register_page():
     list_of_secure_questions = return_all_secure_question()
     return render_template("register.html", list_of_secure_questions=list_of_secure_questions)
 
+@app.route('/forgot', methods=['GET'])
+def forgot_page():
+    return render_template("forgot.html")
 
+@app.route("/forgot", methods=['GET'])
+def forgot():
+    return render_template("forgot.html")
 
 # login route making a post request to the server to check the username and password using the auth function from usermod.py
 @app.route('/auth/login', methods=['POST'])
@@ -96,10 +96,8 @@ def register():
     
     #result = sign_up(username, password, secure_question1, answer1, secure_question2, answer2)
     if result[0]:
-        flash('Signup successful! Please login.', 'success')
         return redirect(url_for('login_page'))
     else:
-        flash('Signup failed. Please try again.', 'error')
         return redirect(url_for('register_page'))
 
 # making a post request to the server to get secure questions
@@ -194,24 +192,18 @@ def test_get_question_dict():
 
 
 # get the secure questions for the user, and send it to the resetq page
-@app.route("/forgot", methods=['GET', 'POST'])
-def forgot():
+@app.route("/auth/forgot", methods=['POST'])
+def forgot_questions():
     username = request.form.get('username')
     # print(username)
-    if request.method == "POST":
-        if username is None:
-            flash("Not existing username. Please try again.")
-            return redirect(url_for('forgot'))
-        questions = show_secure_question(username)
-        if not questions:
-            return redirect(url_for('forgot'))
-        # return questions
-        else:
-            session['username'] = username
-            session['questions'] = questions
-            return redirect(url_for('answer'))
+    questions = show_secure_question(username)
+    if not questions:
+        return redirect(url_for('forgot_questions'))
+    # return questions
     else:
-        return render_template("forgot.html")
+        session['username'] = username
+        session['questions'] = questions
+        return redirect(url_for('answer'))
     
 # to the reset password page, receive answers here and send it to the resetp route
 @app.route("/forgot/answer", methods=['GET'])
@@ -244,52 +236,7 @@ def answer_questions():
             message = f"You tried {attempts} attempts. You have only {5 - attempts} more attempts."
         if session.get('fail_count') == 5:
             message = "You tried 5 attempts. Please try again later."
-
         return redirect(url_for('forgot_questions'), message) 
-    
-
-
-
-@app.route("/endless", methods=['GET'])
-def endless():
-    from manage import get_existing_words
-    word_list = get_existing_words("database/data.json")    
- 
-    length = len(word_list)
-    questions_list_json = generate_question_list(length,length,"QUESTION_BLANK")
-    return render_template("endless.html", questions_list=questions_list_json)
-
-@app.route("/review", methods=['GET'])
-def review():
-    wrongQuestions = select_max_id_by_account('QUESTION_ACCOUNT', 2,'incorrect_questions')
-    
-    if wrongQuestions is not None:
-        questions_id = eval(wrongQuestions[0])
-    else:
-        questions_id = []
-        answer_text = []
-
-    questions_text = []
-    answer_text = []
-    for id in questions_id:
-        answer_text.append(select_id('QUESTION_BLANK', id,'correct'))
-        questions_text.append(select_id('QUESTION_BLANK', id,'example'))
-
-    list_question = [item[0] for item in questions_text]
-    list_ans = [item[0] for item in answer_text]
-
-    return render_template("review.html", wrongQuestion_JSON=json.dumps(list_question), answer_JSON=json.dumps(list_ans))
-        
-        
-
-        
-############################################################################################################
-# a simple testing route 
-# route is /test_question
-# click on submit button to update the score
-# this is a prototype for the question page, when we done implementing the question page, we will remove this route
-# and the test_question.html
-
 ############################################################################################################
 # a simple testing route 
 # route is /test_question
@@ -300,8 +247,6 @@ def review():
 @app.route('/test_question', methods=['GET'])
 def test_question():
     return render_template("test_question.html")
-
-
 # when we click on submit button after answering all quesions in the question page
 @app.route("/question/update_score", methods=['POST'])
 def update_score_page():
@@ -312,8 +257,6 @@ def update_score_page():
     incorrect_questions = data.get('incorrect_questions')
     update_score(username,score,correct_questions,incorrect_questions)
     return jsonify({'message': 'Score updated successfully'}), 200
-
-
 
 
 if __name__ == "__main__":

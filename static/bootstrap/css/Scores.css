@@ -32,7 +32,7 @@
 .MainBody {
     position: relative;
     display: grid;
-    grid-template-columns: 23% 53% 23%;
+    grid-template-columns: 33% 33% 33%;
     width: 100%;
 }
 
@@ -52,6 +52,7 @@ td, th {
     text-align: center;
     font-family: 'din-round', sans-serif;
     font-size: 3.5vh;
+
 }
 
 #TopScores{
@@ -62,29 +63,6 @@ td, th {
     padding: 0px;
     font-size: 7vh;
     grid-column: 2;
-}
-
-#DarkModeToggle {
-    width: 70px;
-    height: 45px;
-    border-radius: 10%;
-    border: none;
-    background-color: var(--dark-grey);
-    border: #353F98 2px solid;
-    margin-left: 5vw;
-    font-family: 'din-round', sans-serif;
-}
-
-#DarkModeToggle:hover {
-    background-color: var(--hover-blue);
-}
-
-#DarkModeToggle.dark-mode {
-    background-color: white;
-}
-
-#DarkModeToggle.dark-mode:hover {
-    background-color: var(--hover-blue);
 }
 
 body{ 
@@ -127,22 +105,10 @@ li a:hover {
     justify-items:  right;
 }
 
-body.dark-mode {
-    background-color:var(--dark-grey);
-    color: white;
-}
+@media screen and (max-width: 799px) {
 
-@media screen and (max-width: 1000px) {
-
-.banner{
-    display: flex;
-    flex-direction: column;
-}
-
-#DarkModeToggle {
-    order: 3;
-    margin: auto;
-}
-
-
+    .banner{
+        display: flex;
+        flex-direction: column;
+    }
 }

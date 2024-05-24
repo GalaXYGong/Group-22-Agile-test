@@ -43,7 +43,7 @@
     grid-column: 2;
 }
 
-li {
+li{
     display: inline;
     list-style: none;
     text-decoration: none;
@@ -89,14 +89,12 @@ body.dark-mode {
 }
 
 #DarkModeToggle {
-    width: 70px;
-    height: 45px;
-    border-radius: 10%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     border: none;
     background-color: var(--dark-grey);
     border: #353F98 2px solid;
-    margin-left: 5vw;
-    font-family: 'din-round', sans-serif;
 }
 
 #DarkModeToggle:hover {
@@ -181,7 +179,7 @@ body.dark-mode {
     margin: 10px;
 }
 /* ------------------------------------- MOBILE ----------------------------------------- */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 799px) {
 
 .banner{
     display: flex;
@@ -191,7 +189,7 @@ body.dark-mode {
 
 #Welcome{
     text-align: center;
-    font-family: 'din-round', sans-serif;
+    font-family: 'dine-round', sans-serif;
     color: white;
     margin: 0px;
     padding: 0px;
@@ -222,11 +220,6 @@ body.dark-mode {
     background-color: var(--dark-blue);
     border-radius: 10px;
     border: none;
-}
-
-#DarkModeToggle {
-    order: 3;
-    margin: auto;
 }
 
 }

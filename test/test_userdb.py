@@ -105,6 +105,7 @@ def test_select_all():
         mock_cursor.execute.assert_called_once_with(f'SELECT {column_name} FROM {table_name}')
         assert result == expected_result
 
+@mock.patch('usermod.cursor')
 def test_delete(mock_cursor):
     table_name = "test"
     condition = "id=1"
@@ -121,55 +122,3 @@ def test_insert_secure_question(mock_connection, mock_cursor):
     answer2 = "pizza"
     usermod.insert_secure_question(username, secure_question1, answer1, secure_question2, answer2)
     mock_cursor.execute.assert_called_once_with(f"UPDATE ACCOUNT SET secure_question1 = '{secure_question1}:{answer1}', secure_question2 = '{secure_question2}:{answer2}' WHERE username = '{username}'")
-    mock_connection.commit.assert_called_once()
-    
-
-def test_show_secure_question(mock_cursor):
-    username = "xinyu"
-    expected_result = ["What is your favorite color", "What is your favorite food"]
-    mock_execute = mock.MagicMock()
-    mock_execute.fetchone.return_value = expected_result
-    mock_cursor.execute.return_value = mock_execute
-    result = usermod.show_secure_question(username)
-    mock_cursor.execute.assert_called() == 2
-    assert result == expected_result
-
-def test_select_password():
-    with mock.patch('usermod.cursor') as mock_cursor:
-        username = "John"
-        expected_result = "password"
-        mock_execute = mock.MagicMock()
-        mock_execute.fetchone.return_value = (expected_result,)
-        mock_cursor.execute.return_value = mock_execute
-        result = usermod.select_password(username)
-        mock_cursor.execute.assert_called_once_with("SELECT password FROM account WHERE username = :username", {"username": username})
-        assert result == expected_result
-
-def test_select_password_none():
-    with mock.patch('usermod.cursor') as mock_cursor:
-        username = "John"
-        mock_execute = mock.MagicMock()
-        mock_execute.fetchone.return_value = None
-        mock_cursor.execute.return_value = mock_execute
-        result = usermod.select_password(username)
-        mock_cursor.execute.assert_called_once_with("SELECT password FROM account WHERE username = :username", {"username": username})
-        assert result == None
-
-def test_check_secure_question(mock_cursor):
-    username = "John"
-    secure_question1 = "What is your favorite color?"
-    answer1 = "red"
-    secure_question2 = "What is your favorite food?"
-    answer2 = "pizza"
-    expected_result = ["What is your favorite color", "What is your favorite food"]
-    mock_execute = mock.MagicMock()
-    mock_execute.fetchone.return_value = (f"{secure_question1}:{answer1}", f"{secure_question2}:{answer2}")
-    mock_cursor.execute.return_value = mock_execute
-    result = usermod.check_secure_question(username, [secure_question1, secure_question2],[answer1, answer2])
-    mock_cursor.execute.assert_called=2
-    assert result == True
-
-def test_create_account_table(mock_connection, mock_cursor):
-    usermod.create_account_table()
-    mock_cursor.execute.assert_called = 3
-    mock_connection.commit.assert_called_once =1

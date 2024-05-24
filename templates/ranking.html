@@ -61,7 +61,9 @@
                     <a href="{{ url_for('profile') }}">Profile: {{ username }}</a>
                 </li>
                 <li class="page">
-                    <a href="{{ url_for('logout') }}">Logout</a>
+                    <form id="logoutForm" action="{{ url_for('logout') }}" method="POST">
+                        <a href="{{ url_for('home') }}" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                    </form>
                 </li>
                 {% endif %}
               </ul>
@@ -69,41 +71,12 @@
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
-    </nav>
-    <style>
-      footer {
-    margin-top: 500px;
-    color: black;
-}
-    </style>
-    <footer>
-      <div class="container"id="maincontent" tabindex="-1">
-          <div class="col-lg-8 col-lg-offset-2">
-            <form action="/profile/update/password" method="POST">
-              <table>
-                <tr>
-                  <th for="username">Username</th>
-                  <th for="password">Current Password</th>
-                  <th for="new_password">New Password</th>
-                  <th> Question History</th>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>
-                    <input type="password" name="password" id="password" placeholder="Current password" required>
-                  </td>
-                  <td>
-                    <input type="password" name="new_password" id="new_password" placeholder="New password" required>
-                    <button type="submit" class="btn btn-primary">Reset</button> 
-                  </td>
-                  <td>1</td>
-              </table>
-              <input type="hidden" name="username" value="{{ username }}">
-            </form>
-        </div>
-      </footer>
-    </body>
-  
+</nav>
+
+
+  <div class="container">
+    
+  </div>
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -119,6 +92,6 @@
 
   <!-- Bootstrap Core JavaScript -->
   <script src="static\bootstrap\vendor\bootstrap\js\bootstrap.min.js"></script>
-
+</body>
 
 </html>
